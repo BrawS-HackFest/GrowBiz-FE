@@ -24,11 +24,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: email,
             password: password,
           );
-          await _firebaseAuth.currentUser!.sendEmailVerification();
-          final uid = _firebaseAuth.currentUser!.uid;
-          final emailUser = _firebaseAuth.currentUser!.email;
-          await authRepository.registerRepository(uid, emailUser.toString());
-          emit(RegisterSuccess());
+          try{
+            final uid = _firebaseAuth.currentUser!.uid;
+            final emailUser = _firebaseAuth.currentUser!.email;
+            await authRepository.registerRepository(uid, emailUser.toString());
+            await _firebaseAuth.currentUser!.sendEmailVerification();
+            emit(RegisterSuccess());
+          }catch(e){
+            await _firebaseAuth.currentUser!.delete();
+            emit(AuthError(error: e.toString()));
+          }
         }
       }on FirebaseAuthException catch(e){
         emit(AuthError(error: e.message!));

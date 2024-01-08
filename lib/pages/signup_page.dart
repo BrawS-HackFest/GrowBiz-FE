@@ -92,7 +92,7 @@ class SignUpPage extends StatelessWidget {
                         SizedBox(
                             width: double.infinity,
                             child: MyButton(
-                                text: 'Daftar',
+                                text: (state is AuthLoading) ? 'Loading...' :  'Daftar',
                                 color: MyColors.primaryBase,
                                 onPressed: () {
                                   context.read<AuthBloc>().add(RegisterEvent(

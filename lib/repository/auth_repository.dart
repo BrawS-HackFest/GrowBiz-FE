@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 
 class AuthRepository{
   Dio dio = Dio();
-
   Future registerRepository(String uid, String email)async{
     try{
       print("uuid : $uid");
@@ -19,10 +18,10 @@ class AuthRepository{
         return true;
       }
       else{
-        print('error register');
+        throw Exception('error registration');
       }
     }catch(e){
-      print(e.toString());
+      throw Exception(e.toString());
     }
 
 
