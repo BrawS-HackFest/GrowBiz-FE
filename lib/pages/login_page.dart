@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
-import 'package:hackfest_mobile/pages/home_page.dart';
+import 'package:hackfest_mobile/pages/main_page.dart';
 import 'package:hackfest_mobile/pages/signup_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/widgets/my_button.dart';
@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
             }
             if(state is AuthSuccess){
              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
-               return HomePage();
+               return MainPage();
              },));
             }
           },

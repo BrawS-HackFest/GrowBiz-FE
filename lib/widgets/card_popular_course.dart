@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 class CardPopularCourse extends StatelessWidget {
@@ -45,7 +46,7 @@ class CardPopularCourse extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(Icons.star_outlined,color: MyColors.secondaryBase,size: 13),
+                        SvgPicture.asset('assets/svgs/star_icon.svg',color: MyColors.secondaryBase,width: 13),
                         Text('$rating', style: MyTextStyle.captionH5(color: MyColors.blackBase),)
                       ],
                     ),
@@ -59,7 +60,7 @@ class CardPopularCourse extends StatelessWidget {
           const SizedBox(height: 5,),
           Row(
             children: [
-              Icon(Icons.person, color: MyColors.grey200,size: 13,),
+              SvgPicture.asset('assets/svgs/person_icon.svg', color: MyColors.grey200,width: 13,),
               Text(numberOfPeople, style: MyTextStyle.judulH5(color: MyColors.grey200),)
             ],
           ),

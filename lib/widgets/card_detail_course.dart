@@ -52,7 +52,7 @@ class CardDetailCourse extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(Icons.star_outlined,color: MyColors.secondaryBase,size: 13),
+                        SvgPicture.asset('assets/svgs/star_icon.svg',color: MyColors.secondaryBase,width: 13),
                         Text('4,8', style: MyTextStyle.captionH5(color: MyColors.blackBase),)
                       ],
                     ),
@@ -81,7 +81,7 @@ class CardDetailCourse extends StatelessWidget {
                 Container(
                   child: Row(
                     children: [
-                      Icon(Icons.person, color: MyColors.grey200,size: 13,),
+                      SvgPicture.asset('assets/svgs/person_icon.svg', color: MyColors.grey200,width: 13,),
                       const SizedBox(width: 5,),
                       Text('2.308', style: MyTextStyle.judulH5(color: MyColors.grey200),),
                     ],

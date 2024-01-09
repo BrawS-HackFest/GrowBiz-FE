@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/pages/payment_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
@@ -67,10 +68,8 @@ class _DetailPageState extends State<DetailPage> {
                     Container(
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.person,
-                            color: MyColors.grey200,
-                          ),
+                          SvgPicture.asset('assets/svgs/person_icon.svg',color: MyColors.grey300,width: 13),
+                          const SizedBox(width: 3,),
                           Text(
                             '2.380',
                             style: MyTextStyle.judulH5(color: MyColors.grey200),
@@ -81,10 +80,8 @@ class _DetailPageState extends State<DetailPage> {
                     Container(
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.money_outlined,
-                            color: MyColors.primaryBase,
-                          ),
+                          SvgPicture.asset('assets/svgs/money_icon.svg',color: MyColors.primaryBase,width: 22),
+                          const SizedBox(width: 3,),
                           Text(
                             'Rp.50.000',
                             style: MyTextStyle.judulH5(
@@ -96,10 +93,8 @@ class _DetailPageState extends State<DetailPage> {
                     Container(
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.star,
-                            color: MyColors.secondaryBase,
-                          ),
+                          SvgPicture.asset('assets/svgs/star_icon.svg',color: MyColors.secondaryBase,width: 13),
+                          const SizedBox(width: 3,),
                           Text(
                             '4,9',
                             style:
