@@ -12,8 +12,8 @@ class CourseSuccess extends CourseState{
   CourseSuccess({required this.courseModel});
 }
 class CourseSingleSuccess extends CourseState{
-  final CourseModel courseModel;
-  CourseSingleSuccess({required this.courseModel});
+  final DetailCourseModel detailCourseModelcourseModel;
+  CourseSingleSuccess({required this.detailCourseModelcourseModel});
 }
 class CourseFailed extends CourseState{
   String error;

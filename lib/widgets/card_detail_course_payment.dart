@@ -3,7 +3,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 class CardDetailCoursePayment extends StatelessWidget {
-  const CardDetailCoursePayment({super.key});
+  CardDetailCoursePayment({super.key, required this.title, required this.rating, required this.buyer, required this.price, required this.image});
+  String title;
+  String rating;
+  String buyer;
+  String price;
+  String image;
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +29,14 @@ class CardDetailCoursePayment extends StatelessWidget {
                 decoration:BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Image.asset('assets/images/popular1.png', fit: BoxFit.cover,),
+                child: Image.network(image, fit: BoxFit.cover,),
               ),
               const SizedBox(width: 12,),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Dasar Digital Marketing', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
+                    Text(title, style: MyTextStyle.judulH5(color: MyColors.blackBase),),
                     const SizedBox(height: 10,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,7 +57,7 @@ class CardDetailCoursePayment extends StatelessWidget {
                                 children: [
                                   SvgPicture.asset('assets/svgs/person_icon.svg', color: MyColors.grey200,),
                                   const SizedBox(width: 5,),
-                                  Text('2.398',style: MyTextStyle.captionH5(color: MyColors.grey200),)
+                                  Text(buyer,style: MyTextStyle.captionH5(color: MyColors.grey200),)
                                 ],
                               ),
                             ),
@@ -65,7 +71,7 @@ class CardDetailCoursePayment extends StatelessWidget {
                                 children: [
                                   SvgPicture.asset('assets/svgs/star_icon.svg', color: MyColors.secondaryBase,),
                                   const SizedBox(width: 5,),
-                                  Text('4.9',style: MyTextStyle.captionH5(color: MyColors.blackBase),)
+                                  Text(rating,style: MyTextStyle.captionH5(color: MyColors.blackBase),)
                                 ],
                               ),
                             ),
@@ -80,7 +86,7 @@ class CardDetailCoursePayment extends StatelessWidget {
                                     children: [
                                       SvgPicture.asset('assets/svgs/money_icon.svg', color: MyColors.primaryBase,),
                                       const SizedBox(width: 5,),
-                                      Text('Rp.50.000',style: MyTextStyle.captionH5(color: MyColors.primaryBase),)
+                                      Text(price,style: MyTextStyle.captionH5(color: MyColors.primaryBase),)
                                     ],
                                   ),
                                 )

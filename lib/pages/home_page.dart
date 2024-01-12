@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print((context.read<AuthBloc>().state as AuthSuccess).token);
+    print((context.read<AuthBloc>().state as AuthSuccess).token.replaceAll(RegExp(r'\s+'), ''));
     return Scaffold(
       body: ScrollConfiguration(
         behavior: NoGlowScrollBehavior(),

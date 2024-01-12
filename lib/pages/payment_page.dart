@@ -7,7 +7,12 @@ import 'package:hackfest_mobile/widgets/card_detail_course_payment.dart';
 import 'package:hackfest_mobile/widgets/my_button.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({super.key});
+  PaymentPage({super.key, required this.title, required this.rating, required this.buyer, required this.price, required this.image});
+  String title;
+  String rating;
+  String buyer;
+  String price;
+  String image;
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -57,7 +62,13 @@ class _PaymentPageState extends State<PaymentPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CardDetailCoursePayment(),
+                CardDetailCoursePayment(
+                  title: widget.title,
+                  price: widget.price,
+                  image: widget.image,
+                  buyer: widget.buyer,
+                  rating: widget.rating,
+                ),
                 const SizedBox(
                   height: 35,
                 ),

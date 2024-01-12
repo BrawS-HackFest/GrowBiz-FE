@@ -25,7 +25,7 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
       try{
         emit(CourseLoading());
         final courseSingle = await courseRepository.getSingleCourse(event.id);
-        emit(CourseSingleSuccess(courseModel: courseSingle));
+        emit(CourseSingleSuccess(detailCourseModelcourseModel: courseSingle));
       }catch(e){
         emit(CourseFailed(e.toString()));
       }
