@@ -3,6 +3,7 @@ import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/card_article.dart';
 import 'package:hackfest_mobile/widgets/my_textfield.dart';
+import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
 
 class AllArticlePage extends StatelessWidget {
   AllArticlePage({super.key});
@@ -13,7 +14,7 @@ class AllArticlePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
-        title: Text('Kursus', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
+        title: Text('Artikel Terkini', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
         centerTitle: true,
       ),
       body: Padding(
@@ -23,11 +24,15 @@ class AllArticlePage extends StatelessWidget {
             MyTextField(hint: 'Cari Sesuatu', controller: searchController, icon: Icons.search),
             const SizedBox(height: 15,),
             Expanded(
-                child: ListView.separated(itemBuilder: (context, index) {
-                  return CardArticle();
-                }, separatorBuilder: (context, index) {
-                  return const SizedBox(height: 15,);
-                }, itemCount: 10),
+                child: ScrollConfiguration(
+                  behavior: NoGlowScrollBehavior(),
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                    return CardArticle();
+                  }, separatorBuilder: (context, index) {
+                    return const SizedBox(height: 15,);
+                  }, itemCount: 10),
+                ),
             )
           ],
         ),

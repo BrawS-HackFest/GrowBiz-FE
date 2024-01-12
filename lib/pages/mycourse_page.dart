@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hackfest_mobile/styles/my_colors.dart';
-import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/card_mycourse.dart';
 import 'package:hackfest_mobile/widgets/card_waiting_payment.dart';
 import 'package:hackfest_mobile/widgets/my_textfield.dart';
-class MyCoursePage extends StatelessWidget {
+import 'package:hackfest_mobile/widgets/navigation_top.dart';
+import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+
+class MyCoursePage extends StatefulWidget {
   MyCoursePage({super.key});
 
+  @override
+  State<MyCoursePage> createState() => _MyCoursePageState();
+}
+
+class _MyCoursePageState extends State<MyCoursePage> {
   TextEditingController searchController = TextEditingController();
+
+  int _currentPageIndex = 0; // Added to track the current page index
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +27,63 @@ class MyCoursePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('Kursus Saya', style: MyTextStyle.judulH4(color: MyColors.blackBase),),
-                Text('Belum Bayar', style: MyTextStyle.judulH4(color: MyColors.blackBase),),
+                NavigationTop(
+                  label: 'Kursus Saya',
+                  id: 0,
+                  selected: _currentPageIndex, // Adjusted to use _currentPageIndex
+                ),
+                NavigationTop(
+                  label: 'Belum Bayar',
+                  id: 1,
+                  selected: _currentPageIndex, // Adjusted to use _currentPageIndex
+                ),
               ],
             ),
             const SizedBox(height: 20,),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 22),
-                child: MyTextField(hint: 'Cari kursus anda', controller:searchController , icon: Icons.search)
+              child: MyTextField(hint: 'Cari kursus anda', controller: searchController, icon: Icons.search),
             ),
             const SizedBox(height: 20,),
-            CardMyCourse(),
-            CardWaitingPayment()
-
-            
+            Expanded(
+              child: PageView(
+                controller: PageController(
+                  initialPage: _currentPageIndex,
+                  viewportFraction: 1,
+                ),
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPageIndex = index;
+                  });
+                },
+                children: [
+                  ScrollConfiguration(
+                    behavior: NoGlowScrollBehavior(),
+                    child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return CardMyCourse();
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(height: 10,);
+                      },
+                      itemCount: 3,
+                    ),
+                  ),
+                  ScrollConfiguration(
+                    behavior: NoGlowScrollBehavior(),
+                    child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return CardWaitingPayment();
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(height: 10,);
+                      },
+                      itemCount: 3,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

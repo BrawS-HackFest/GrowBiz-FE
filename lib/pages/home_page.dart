@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
+import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
 import 'package:hackfest_mobile/models/categories_model.dart';
 import 'package:hackfest_mobile/pages/all_article_page.dart';
 import 'package:hackfest_mobile/pages/all_course_page.dart';
@@ -24,7 +25,14 @@ class _HomePageState extends State<HomePage> {
   TextEditingController searchControlller = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    context.read<CourseBloc>().add(CourseFetched());
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print((context.read<AuthBloc>().state as AuthSuccess).token);
     return Scaffold(
       body: ScrollConfiguration(
         behavior: NoGlowScrollBehavior(),
@@ -41,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     BlocBuilder<AuthBloc, AuthState>(
                       builder: (context, state) {
-                        print((state as AuthSuccess).token);
+                        //print((state as AuthSuccess).token);
                         return Text('Halo,izzz', style: MyTextStyle.judulH3(color: MyColors.blackBase),);
                       },
                     ),
@@ -116,27 +124,37 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 7,),
-                SizedBox(
-                  height: 200,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return CardPopularCourse(
-                          image:'assets/images/popular1.png' ,
-                          rating: '4,9',
-                          title: 'Dasar Digital Marketing',
-                          numberOfPeople: '2.380',
-                          categories: 'teratas',
-                          price: '50.000',
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                              return DetailPage();
-                            }));
-                          },
-                        );
-                      }, separatorBuilder: (context, index) {
-                    return const SizedBox(width: 8,);
-                  }, itemCount: 2),
+                BlocBuilder<CourseBloc, CourseState>(
+                  builder: (context, state) {
+                    if(state is CourseSuccess){
+                      final courseDatas = state.courseModel;
+                      return SizedBox(
+                        height: 210,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return CardPopularCourse(
+                                  image: courseDatas[index].pict.toString(),
+                                  rating: courseDatas[index].rating.toString(),
+                                  title: courseDatas[index].name,
+                                  numberOfPeople: courseDatas[index].buyer.toString(),
+                                  categories: 'teratas',
+                                  price: courseDatas[index].price.toString(),
+                                      onTap: (){
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                                      return DetailCoursePage(id: courseDatas[index].id);
+                                    }));
+                                  },
+                                  );
+                            }, separatorBuilder: (context, index) {
+                          return const SizedBox(width: 8,);
+                        }, itemCount: courseDatas.length),
+                      );
+                    }
+                    else{return Container();}
+                  }
+
+
                 ),
                 const SizedBox(height: 20,),
                 Row(

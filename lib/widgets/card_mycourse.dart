@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hackfest_mobile/pages/list_content_course.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 
@@ -78,12 +79,19 @@ class CardMyCourse extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: MyColors.primaryBase
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                        return ListContentCourse();
+                      },));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: MyColors.primaryBase
+                      ),
+                      child: Icon(Icons.navigate_next, color: MyColors.whiteBase,),
                     ),
-                    child: Icon(Icons.navigate_next, color: MyColors.whiteBase,),
                   )
 
                 ],

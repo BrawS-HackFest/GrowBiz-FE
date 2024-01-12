@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 class CardDetailCoursePayment extends StatelessWidget {
@@ -44,10 +45,12 @@ class CardDetailCoursePayment extends StatelessWidget {
                                 ),
                                 child:Text('Teratas', style: MyTextStyle.captionH5(color: MyColors.secondaryBase),)
                             ),
+                            const SizedBox(height: 10,),
                             Container(
                               child: Row(
                                 children: [
-                                  Icon(Icons.person, color: MyColors.grey200,),
+                                  SvgPicture.asset('assets/svgs/person_icon.svg', color: MyColors.grey200,),
+                                  const SizedBox(width: 5,),
                                   Text('2.398',style: MyTextStyle.captionH5(color: MyColors.grey200),)
                                 ],
                               ),
@@ -60,19 +63,23 @@ class CardDetailCoursePayment extends StatelessWidget {
                             Container(
                               child: Row(
                                 children: [
-                                  Icon(Icons.star, color: MyColors.secondaryBase,),
+                                  SvgPicture.asset('assets/svgs/star_icon.svg', color: MyColors.secondaryBase,),
+                                  const SizedBox(width: 5,),
                                   Text('4.9',style: MyTextStyle.captionH5(color: MyColors.blackBase),)
                                 ],
                               ),
                             ),
+                            const SizedBox(height: 8,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
 
                                 Container(
                                   child: Row(
                                     children: [
-                                      Icon(Icons.money, color: MyColors.primaryBase,),
+                                      SvgPicture.asset('assets/svgs/money_icon.svg', color: MyColors.primaryBase,),
+                                      const SizedBox(width: 5,),
                                       Text('Rp.50.000',style: MyTextStyle.captionH5(color: MyColors.primaryBase),)
                                     ],
                                   ),

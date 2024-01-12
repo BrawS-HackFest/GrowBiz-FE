@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
 import 'package:hackfest_mobile/pages/payment_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
@@ -8,16 +10,21 @@ import 'package:hackfest_mobile/widgets/my_button.dart';
 import 'package:hackfest_mobile/widgets/review_section.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
 
-class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
-
+class DetailCoursePage extends StatefulWidget {
+  DetailCoursePage({super.key, required this.id});
+  int id;
   @override
-  State<DetailPage> createState() => _DetailPageState();
+  State<DetailCoursePage> createState() => _DetailCoursePageState();
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _DetailCoursePageState extends State<DetailCoursePage> {
   bool isDescriptionSelected = true;
 
+  @override
+  void initState() {
+    super.initState();
+    context.read<CourseBloc>().add(CourseSingleFetched(id: widget.id));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
