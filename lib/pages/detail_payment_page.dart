@@ -4,7 +4,8 @@ import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/my_button.dart';
 
 class DetailPaymentPage extends StatelessWidget {
-  const DetailPaymentPage({super.key});
+  DetailPaymentPage({super.key, required this.invCode});
+  String invCode;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class DetailPaymentPage extends StatelessWidget {
                 Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                    children: [
-                     Text('2333 2454 1109 231', style: MyTextStyle.judulH1(color: MyColors.primaryBase),),
+                     Text(invCode, style: MyTextStyle.judulH1(color: MyColors.primaryBase),),
                      Text('Salin', style: MyTextStyle.captionH5(color: MyColors.greyBase),)
                    ],
                 ),

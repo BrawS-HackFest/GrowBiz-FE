@@ -197,6 +197,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                             onPressed: (){
                               Navigator.of(context).push(MaterialPageRoute(builder: (context){
                                 return PaymentPage(
+                                  courseId: courseSingle.id,
                                   image: courseSingle.pict,
                                   rating: courseSingle.rating.toString(),
                                   buyer: courseSingle.buyer.toString(),

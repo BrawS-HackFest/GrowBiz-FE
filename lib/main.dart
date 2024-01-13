@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
 import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:hackfest_mobile/bloc/payment/payment_bloc.dart';
 import 'package:hackfest_mobile/firebase_options.dart';
 import 'package:hackfest_mobile/pages/splash_page.dart';
 import 'package:hackfest_mobile/repository/course_repository.dart';
+import 'package:hackfest_mobile/repository/payment_repository.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthBloc(),),
         BlocProvider(create: (context) => CourseBloc(courseRepository: CourseRepository())),
+        BlocProvider(create: (context) => PaymentBloc(paymentRepository: PaymentRepository())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
