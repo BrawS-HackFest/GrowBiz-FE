@@ -5,7 +5,7 @@
 An application has been developed to address various issues related to the 17 Sustainable Development Goals (SDGs), particularly focusing on challenges related to **Quality Education** (SDG No. 4) and **Decent Work and Economic Growth** (SDG No. 8). The main features offered include courses for the development of micro, small, and medium enterprises (UMKM), as well as a platform for finding needed workforce.
 
 ## 📖 GrowBiz-FE
-This repository is utilized to store the source code of our application, particularly on the server side. We employ Golang with the Gin framework as the core of this application. For data storage, we use MySQL. In the development of this application, we have also integrated several third-party services, such as authentication using Firebase and a payment gateway using Midtrans. For deployment, we plan to utilize the Google Cloud Platform (GCP).
+This repository is used to store the source code of our application, especially on the display side. We use the Flutter framework as the core of this application. In developing this application, we have also integrated several third party services, such as authentication using Firebase and payment gateway using Midtrans. For implementation.
 
 ## 💻 Features
 - Authentication ✔️
