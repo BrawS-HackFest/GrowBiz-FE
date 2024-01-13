@@ -1,5 +1,5 @@
 # 📈 GrowBiz - HackFest
-<img width="150" alt="GrowBiz Logo" src="https://kpkmxnicmhvpqmxywspm.supabase.co/storage/v1/object/public/picture/Untitled%20(1).png">
+<img width="800" alt="GrowBiz Logo" src="https://kpkmxnicmhvpqmxywspm.supabase.co/storage/v1/object/public/picture/Untitled%20(1).png">
 
 ## 📖 Description
 An application has been developed to address various issues related to the 17 Sustainable Development Goals (SDGs), particularly focusing on challenges related to **Quality Education** (SDG No. 4) and **Decent Work and Economic Growth** (SDG No. 8). The main features offered include courses for the development of micro, small, and medium enterprises (UMKM), as well as a platform for finding needed workforce.
