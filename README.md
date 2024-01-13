@@ -16,6 +16,15 @@ This repository is used to store the source code of our application, especially 
 ## 🔧 Tech
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
+## 💻 Preview
+# Landing Screen
+<img width="150" alt="Landing Screen" src="https://kpkmxnicmhvpqmxywspm.supabase.co/storage/v1/object/public/picture/landing.jpeg?t=2024-01-12T16%3A51%3A31.089Z">
+# Login Screen
+<img width="150" alt="Login Screen" src="https://kpkmxnicmhvpqmxywspm.supabase.co/storage/v1/object/public/picture/login.jpeg?t=2024-01-12T16%3A50%3A36.056Z">
+# Home Screen
+<img width="150" alt="Home Screen" src="https://kpkmxnicmhvpqmxywspm.supabase.co/storage/v1/object/public/picture/home.jpeg">
+
+
 ## ⚡Team
 | Role | Name  |
 | ------- | --- |

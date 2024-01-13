@@ -200,7 +200,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                 color: MyColors.primaryBase,
                                 onPressed: () {
                                   //token = (context.read<AuthBloc>().state as AuthSuccess).token.trim().replaceAll(RegExp(r'\s+'), '');
-                                  final token = cleanedToken((context.read<AuthBloc>().state as AuthSuccess).token);
+                                  final token = (context.read<AuthBloc>().state as AuthSuccess).token;
                                   print('token from payment: $token');
                                   print('amount ${widget.price}');
                                   print('courseId:  ${widget.courseId}');
