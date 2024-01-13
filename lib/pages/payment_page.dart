@@ -26,6 +26,9 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> {
   String _selectePayment = "";
 
+  String cleanedToken(String token) {
+    return token.split('\n').join('').split(' ').join('');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -196,13 +199,14 @@ class _PaymentPageState extends State<PaymentPage> {
                                 text: (state is PaymentLoading) ? 'Loading...' : 'Bayar',
                                 color: MyColors.primaryBase,
                                 onPressed: () {
-                                  String token = (context.read<AuthBloc>().state as AuthSuccess).token.trim().replaceAll('\n', '');
+                                  //token = (context.read<AuthBloc>().state as AuthSuccess).token.trim().replaceAll(RegExp(r'\s+'), '');
+                                  final token = cleanedToken((context.read<AuthBloc>().state as AuthSuccess).token);
                                   print('token from payment: $token');
                                   print('amount ${widget.price}');
                                   print('courseId:  ${widget.courseId}');
                                   print('method: ${_selectePayment}');
                                   context.read<PaymentBloc>().add(PaymentRequest(
-                                      token: token.trim().replaceAll('\n', ''),
+                                      token: token,
                                       amount: int.parse(widget.price),
                                       courseId: widget.courseId,
                                       method: _selectePayment)
