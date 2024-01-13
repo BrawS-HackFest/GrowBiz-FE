@@ -9,6 +9,7 @@ import 'package:hackfest_mobile/widgets/button_payment.dart';
 import 'package:hackfest_mobile/widgets/card_detail_course_payment.dart';
 import 'package:hackfest_mobile/widgets/my_button.dart';
 import 'package:hackfest_mobile/widgets/my_snackBar.dart';
+import 'package:intl/intl.dart';
 
 class PaymentPage extends StatefulWidget {
   PaymentPage({super.key, required this.title, required this.rating, required this.buyer, required this.price, required this.image,required this.courseId});
@@ -16,7 +17,7 @@ class PaymentPage extends StatefulWidget {
   String title;
   String rating;
   String buyer;
-  String price;
+  int price;
   String image;
 
   @override
@@ -26,9 +27,7 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> {
   String _selectePayment = "";
 
-  String cleanedToken(String token) {
-    return token.split('\n').join('').split(' ').join('');
-  }
+  final currencyFormater = NumberFormat.currency(locale: 'id_ID',symbol: 'Rp.');
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,10 @@ class _PaymentPageState extends State<PaymentPage> {
           if(state is PaymentSucces){
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) {
-                return DetailPaymentPage(invCode: state.invCode,);
+                return DetailPaymentPage(
+                  invCode: state.invCode,
+                  amount: currencyFormater.format(state.amount).toString().replaceAll(RegExp(r',00$'), ''),
+                  method: state.method,);
               },
             ));
           }
@@ -156,7 +158,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               style: MyTextStyle.captionH5(color: MyColors.blackBase),
                             ),
                             Text(
-                              'Rp.50.000',
+                              currencyFormater.format(widget.price).toString().replaceAll(RegExp(r',00$'), ''),
                               style: MyTextStyle.captionH5(color: MyColors.blackBase),
                             )
                           ],
@@ -199,18 +201,22 @@ class _PaymentPageState extends State<PaymentPage> {
                                 text: (state is PaymentLoading) ? 'Loading...' : 'Bayar',
                                 color: MyColors.primaryBase,
                                 onPressed: () {
-                                  //token = (context.read<AuthBloc>().state as AuthSuccess).token.trim().replaceAll(RegExp(r'\s+'), '');
-                                  final token = (context.read<AuthBloc>().state as AuthSuccess).token;
-                                  print('token from payment: $token');
-                                  print('amount ${widget.price}');
-                                  print('courseId:  ${widget.courseId}');
-                                  print('method: ${_selectePayment}');
-                                  context.read<PaymentBloc>().add(PaymentRequest(
-                                      token: token,
-                                      amount: int.parse(widget.price),
-                                      courseId: widget.courseId,
-                                      method: _selectePayment)
-                                  );
+                                  if(_selectePayment==""){
+                                    mySnackBar(context, 'Silahkan pilih metode pembayaran anda!');
+                                  }else{
+                                    String token = '${(context.read<AuthBloc>().state as AuthSuccess).token}';
+                                    token = token.replaceAll('\n','');
+                                    print('token from payment: $token');
+                                    print('amount ${widget.price}');
+                                    print('courseId:  ${widget.courseId}');
+                                    print('method: ${_selectePayment}');
+                                    context.read<PaymentBloc>().add(PaymentRequest(
+                                        token: token,
+                                        amount: widget.price,
+                                        courseId: widget.courseId,
+                                        method: _selectePayment)
+                                    );
+                                  }
                                 })),
                       ),
                       const Spacer(),

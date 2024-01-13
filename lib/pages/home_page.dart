@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                                   title: courseDatas[index].name,
                                   numberOfPeople: courseDatas[index].buyer.toString(),
                                   categories: 'teratas',
-                                  price: courseDatas[index].price.toString(),
+                                  price: courseDatas[index].price,
                                       onTap: (){
                                     Navigator.of(context).push(MaterialPageRoute(builder: (context){
                                       return DetailCoursePage(id: courseDatas[index].id);

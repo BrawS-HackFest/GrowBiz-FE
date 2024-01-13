@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
+import 'package:intl/intl.dart';
 class CardDetailCoursePayment extends StatelessWidget {
   CardDetailCoursePayment({super.key, required this.title, required this.rating, required this.buyer, required this.price, required this.image});
   String title;
   String rating;
   String buyer;
-  String price;
+  int price;
   String image;
+
+  final currencyFormater = NumberFormat.currency(locale: 'id_ID',symbol: 'Rp.');
 
 
   @override
@@ -86,7 +89,7 @@ class CardDetailCoursePayment extends StatelessWidget {
                                     children: [
                                       SvgPicture.asset('assets/svgs/money_icon.svg', color: MyColors.primaryBase,),
                                       const SizedBox(width: 5,),
-                                      Text(price,style: MyTextStyle.captionH5(color: MyColors.primaryBase),)
+                                      Text(currencyFormater.format(price).toString().replaceAll(RegExp(r',00$'), ''),style: MyTextStyle.captionH5(color: MyColors.primaryBase),)
                                     ],
                                   ),
                                 )

@@ -7,7 +7,7 @@ class PaymentRepository{
   Future<PaymentModel> paymentRequest ({required String token, required int amount, required int courseId, required String method})async{
     try{
       //String tokenCleaned = token.replaceAll(RegExp(r'\s+'), '');
-      final response =await dio.post('https://ff8e-180-248-32-238.ngrok-free.app/transactions/charge',options: Options(headers:{"Authorization":"Bearer $token"}),data: {
+      final response =await dio.post('https://b031-180-248-16-90.ngrok-free.app/transactions/charge',options: Options(headers:{"Authorization":"Bearer $token"}),data: {
         'amount': amount,
         'course_id':courseId,
         'method':method

@@ -10,6 +10,7 @@ import 'package:hackfest_mobile/widgets/my_button.dart';
 import 'package:hackfest_mobile/widgets/my_snackBar.dart';
 import 'package:hackfest_mobile/widgets/review_section.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:intl/intl.dart';
 
 class DetailCoursePage extends StatefulWidget {
   DetailCoursePage({super.key, required this.id});
@@ -26,6 +27,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
     super.initState();
     context.read<CourseBloc>().add(CourseSingleFetched(id: widget.id));
   }
+  final currencyFormater = NumberFormat.currency(locale: 'id_ID',symbol: 'Rp.');
   @override
   Widget build(BuildContext context) {
     print(widget.id);
@@ -104,7 +106,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                               SvgPicture.asset('assets/svgs/money_icon.svg',color: MyColors.primaryBase,width: 22),
                               const SizedBox(width: 3,),
                               Text(
-                                courseSingle.price.toString(),
+                                currencyFormater.format(courseSingle.price).toString().replaceAll(RegExp(r',00$'), ''),
                                 style: MyTextStyle.judulH5(
                                     color: MyColors.primaryBase),
                               ),
@@ -201,7 +203,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                                   image: courseSingle.pict,
                                   rating: courseSingle.rating.toString(),
                                   buyer: courseSingle.buyer.toString(),
-                                  price: courseSingle.price.toString(),
+                                  price: courseSingle.price,
                                   title: courseSingle.name.toString(),
                                 );
                               }));
