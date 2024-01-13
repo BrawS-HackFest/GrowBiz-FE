@@ -6,7 +6,9 @@ abstract class PaymentState {}
 class PaymentInitial extends PaymentState {}
 class PaymentSucces extends PaymentState{
   String invCode;
-  PaymentSucces({required this.invCode});
+  int amount;
+  String method;
+  PaymentSucces({required this.invCode,required this.amount, required this.method});
 }
 class PaymentFailed extends PaymentState{
   String error;

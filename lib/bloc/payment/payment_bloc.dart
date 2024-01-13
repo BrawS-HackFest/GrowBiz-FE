@@ -14,12 +14,12 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       try{
         emit(PaymentLoading());
         final paymentReq = await paymentRepository.paymentRequest(
-            token: event.token.trim().replaceAll('\n', ''),
+            token: event.token,
             amount: event.amount,
             courseId: event.courseId,
             method: event.method
         );
-        emit(PaymentSucces(invCode: paymentReq.invCode));
+        emit(PaymentSucces(invCode: paymentReq.invCode, method: paymentReq.method,amount: paymentReq.amount));
       }catch(e){
         emit(PaymentFailed(e.toString()));
       }

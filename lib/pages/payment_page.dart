@@ -193,15 +193,10 @@ class _PaymentPageState extends State<PaymentPage> {
                         child: SizedBox(
                             width: double.infinity,
                             child: MyButton(
-                                text: state is PaymentLoading ? 'Loading...' : 'Bayar',
+                                text: (state is PaymentLoading) ? 'Loading...' : 'Bayar',
                                 color: MyColors.primaryBase,
                                 onPressed: () {
-                                  String token = (context.read<AuthBloc>().state as AuthSuccess).token;
-                                  token = token.replaceAll(' ', '');
-                                  token = token.replaceAll('\n', '');
-                                  token = token.trim();
-                                  token = token.replaceAll(RegExp(r'\s+'), '');
-                                  token = token.replaceAll(RegExp(r"\\n"), "");
+                                  String token = (context.read<AuthBloc>().state as AuthSuccess).token.trim().replaceAll('\n', '');
                                   print('token from payment: $token');
                                   print('amount ${widget.price}');
                                   print('courseId:  ${widget.courseId}');
