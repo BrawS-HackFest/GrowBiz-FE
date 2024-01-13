@@ -11,7 +11,7 @@ This repository is used to store the source code of our application, especially 
 - Authentication ✔️
 - Get all course ✔️
 - Get single course ✔️
-- Buy course for learning 
+- Buy course for learning ✔️
 
 ## 🔧 Tech
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
