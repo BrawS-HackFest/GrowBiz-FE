@@ -15,7 +15,7 @@ class MyCoursePage extends StatefulWidget {
 class _MyCoursePageState extends State<MyCoursePage> {
   TextEditingController searchController = TextEditingController();
 
-  int _currentPageIndex = 0; // Added to track the current page index
+  int _currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
