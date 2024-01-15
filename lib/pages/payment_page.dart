@@ -38,7 +38,7 @@ class _PaymentPageState extends State<PaymentPage> {
             return mySnackBar(context, state.error);
           }
           if(state is PaymentSucces){
-            Navigator.of(context).push(MaterialPageRoute(
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (context) {
                 return DetailPaymentPage(
                   invCode: state.invCode,

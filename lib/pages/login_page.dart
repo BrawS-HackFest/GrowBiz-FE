@@ -78,6 +78,8 @@ class LoginPage extends StatelessWidget {
                           hint: '********',
                           controller: passController,
                           icon: Icons.lock_outline,
+                          type: 'password',
+                          obsecureText: true,
                         ),
                         const SizedBox(
                           height: 8,

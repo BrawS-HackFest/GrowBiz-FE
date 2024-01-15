@@ -1,9 +1,12 @@
-  import 'package:flutter/material.dart';
-  import 'package:hackfest_mobile/styles/my_colors.dart';
-  import 'package:hackfest_mobile/styles/my_text.dart';
-  import 'package:hackfest_mobile/widgets/my_button.dart';
+import 'package:clipboard/clipboard.dart';
+import 'package:flutter/material.dart';
+import 'package:hackfest_mobile/pages/main_page.dart';
+import 'package:hackfest_mobile/styles/my_colors.dart';
+import 'package:hackfest_mobile/styles/my_text.dart';
+import 'package:hackfest_mobile/widgets/my_button.dart';
+import 'package:hackfest_mobile/widgets/my_snackBar.dart';
 
-  class DetailPaymentPage extends StatelessWidget {
+class DetailPaymentPage extends StatelessWidget {
     DetailPaymentPage({super.key, required this.invCode, required this.method, required this.amount});
     String invCode;
     String method;
@@ -54,7 +57,13 @@
                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                      children: [
                        Text(invCode, style: MyTextStyle.judulH1(color: MyColors.primaryBase),),
-                       Text('Salin', style: MyTextStyle.captionH5(color: MyColors.greyBase),)
+                       GestureDetector(
+                         onTap: (){
+                           FlutterClipboard.copy(invCode);
+                           mySnackBar(context, 'Virtual account number berhasil disalin');
+                         },
+                           child: Text('Salin', style: MyTextStyle.captionH5(color: MyColors.greyBase),)
+                       )
                      ],
                   ),
                   const SizedBox(height: 16,),
@@ -85,7 +94,11 @@
                     const Spacer(),
                     SizedBox(
                       width: double.infinity,
-                      child: MyButton(text: 'Ok', color: MyColors.primaryBase, onPressed: (){}),
+                      child: MyButton(text: 'Ok', color: MyColors.primaryBase, onPressed: (){
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+                          return MainPage();
+                        },));
+                      }),
                     ),
                     const Spacer()
                   ],

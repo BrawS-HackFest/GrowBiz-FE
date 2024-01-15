@@ -51,11 +51,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if(isUserVerified?.emailVerified ?? false){
           _firebaseAuth.currentUser!.sendEmailVerification();
           emit(AuthError(error: 'Email belum diverifikasi silahkan verifikasi akun anda!'));
+        }else{
+          await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+          final user = _firebaseAuth.currentUser!;
+          IdTokenResult token = await user.getIdTokenResult();
+          emit(AuthSuccess(token:  token.token.toString()));
         }
-        await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-        final user = _firebaseAuth.currentUser!;
-        IdTokenResult token = await user.getIdTokenResult();
-        emit(AuthSuccess(token:  token.token.toString()));
       }on FirebaseAuthException catch(e){
         emit(AuthError(error: e.message!));
       }catch(e){

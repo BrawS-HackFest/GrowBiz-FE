@@ -76,6 +76,8 @@ class SignUpPage extends StatelessWidget {
                           hint: '********',
                           controller: passController,
                           icon: Icons.lock_outline,
+                          type: 'password',
+                          obsecureText: true,
                         ),
                         const SizedBox(
                           height: 20,
@@ -85,6 +87,8 @@ class SignUpPage extends StatelessWidget {
                           hint: '********',
                           controller: confirmPassController,
                           icon: Icons.lock_outline,
+                          type: 'password',
+                          obsecureText: true,
                         ),
                         const SizedBox(
                           height: 30,
