@@ -47,15 +47,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         String email = event.email;
         String password = event.password;
 
-        final isUserVerified  = _firebaseAuth.currentUser;
-        if(isUserVerified?.emailVerified ?? false){
-          _firebaseAuth.currentUser!.sendEmailVerification();
-          emit(AuthError(error: 'Email belum diverifikasi silahkan verifikasi akun anda!'));
-        }else{
-          await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-          final user = _firebaseAuth.currentUser!;
-          IdTokenResult token = await user.getIdTokenResult();
-          emit(AuthSuccess(token:  token.token.toString()));
+        final user = _firebaseAuth.currentUser;
+
+        if (user != null) {
+          if (user.emailVerified) {
+            final credential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+            final user = credential.user!;
+            IdTokenResult token = await user.getIdTokenResult();
+            emit(AuthSuccess(token:  token.token.toString()));
+          } else {
+            await user.sendEmailVerification();
+            emit(AuthError(error: 'Email belum diverifikasi. Silahkan cek email Anda untuk verifikasi.'));
+          }
+        } else {
+          emit(AuthError(error: 'Login failed. User not logged in.'));
         }
       }on FirebaseAuthException catch(e){
         emit(AuthError(error: e.message!));

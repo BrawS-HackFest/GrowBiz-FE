@@ -16,6 +16,7 @@ class MyColors {
   static Color whiteBase = const Color(0xFFFFFFFF);
 
   static Color neutra100 = const Color(0xFFF4F4F4);
+  static Color neutral200 = const Color(0xFFF9F9F9);
   static Color neutral = const Color(0xFFF0F0F0);
   static Color greyBase = const Color(0xFF6B6C74);
   static Color grey200 = const Color(0xFFB6B7BB);

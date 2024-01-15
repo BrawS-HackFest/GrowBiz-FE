@@ -13,6 +13,7 @@ import 'package:hackfest_mobile/widgets/card_popular_course.dart';
 import 'package:hackfest_mobile/widgets/filter_categories.dart';
 import 'package:hackfest_mobile/widgets/my_textfield.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:hackfest_mobile/widgets/skeletons/skeletons_card_popular_course.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -151,7 +152,18 @@ class _HomePageState extends State<HomePage> {
                         }, itemCount: courseDatas.length),
                       );
                     }
-                    else{return Container();}
+                    else{
+                      return SizedBox(
+                        height: 210,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return SkeletonsCardPopularCourse();
+                            }, separatorBuilder: (context, index) {
+                          return const SizedBox(width: 8,);
+                        }, itemCount: 2),
+                      );
+                    }
                   }
 
 
