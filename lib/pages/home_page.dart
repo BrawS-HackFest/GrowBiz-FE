@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                         child: ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return SkeletonsCardPopularCourse();
+                              return const SkeletonsCardPopularCourse();
                             }, separatorBuilder: (context, index) {
                           return const SizedBox(width: 8,);
                         }, itemCount: 2),

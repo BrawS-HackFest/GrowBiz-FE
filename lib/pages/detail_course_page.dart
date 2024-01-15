@@ -10,7 +10,9 @@ import 'package:hackfest_mobile/widgets/my_button.dart';
 import 'package:hackfest_mobile/widgets/my_snackBar.dart';
 import 'package:hackfest_mobile/widgets/review_section.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:hackfest_mobile/widgets/skeletons/skeletons_course_detail.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DetailCoursePage extends StatefulWidget {
   DetailCoursePage({super.key, required this.id});
@@ -50,7 +52,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
           },
           builder: (context, state) {
             if(state is CourseLoading){
-              return const Center(child: CircularProgressIndicator(),);
+              return const SkeletonsCourseDetail();
             }
             if(state is CourseSingleSuccess){
               final courseSingle = state.detailCourseModelcourseModel;
