@@ -15,12 +15,71 @@ class WorkPage extends StatefulWidget {
 }
 
 class _WorkPageState extends State<WorkPage> {
+  List<String> location = ['Jabodetabek', 'Jawa Timur', 'DI Yogyakarta', 'DKI Jakarta', 'Jawa Barat', 'Jawa Tengah', 'Banten', 'Bali', 'Sulawesi Selatan', 'Kalimantan Selatan', 'Lampung', 'Sumatera Utara', 'Riau', 'Jambi', 'Kalimantan Timur', 'Kalimantan Barat', 'Sumatera Utara', 'Kepulauan Riau' ];
   int _currentPageIndex = 0;
   TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: Drawer(
+        child:Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 50,),
+              Text('Filter', style: MyTextStyle.judulH4(color: MyColors.blackBase),),
+              const SizedBox(height: 30,),
+              Text('Lokasi', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
+              GridView.builder(
+                shrinkWrap: true,
+                itemCount: location.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 8, crossAxisSpacing: 8, childAspectRatio: 130/30),
+                itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                      color: Color(0xFFECECEC),
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Center(child: Text(location[index], style: MyTextStyle.judulH6(color: MyColors.blackBase),)),
+                );
+              },),
+              const SizedBox(height: 28,),
+              Text('Jenis Kerja', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
+              const SizedBox(height: 10,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 130,
+                    height: 30,
+                    decoration: BoxDecoration(
+                    color: Color(0xFFECECEC),
+                    borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Center(child: Text('Office', style: MyTextStyle.judulH6(color: MyColors.blackBase),)),
+                  ),
+                  Container(
+                    width: 130,
+                    height: 30,
+                    decoration: BoxDecoration(
+                        color: Color(0xFFECECEC),
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Center(child: Text('Remote', style: MyTextStyle.judulH6(color: MyColors.blackBase),)),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+
+                ],
+              )
+            ],
+          ),
+        )
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -40,15 +99,24 @@ class _WorkPageState extends State<WorkPage> {
                   SizedBox(
                     width: 250,
                       child: MyTextField(hint: 'Cari kategori pekerjaan', controller:searchController , icon: Icons.search)),
-                  Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SvgPicture.asset('assets/svgs/filter_icon.svg', width: 24,),
-                        const SizedBox(width: 3,),
-                        Text('Filter',style: TextStyle(fontSize: 11, color: MyColors.primaryBase),)
-                      ],
-                    ),
+                  Builder(
+                    builder: (context) {
+                      return GestureDetector(
+                        onTap: (){
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                        child: Container(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SvgPicture.asset('assets/svgs/filter_icon.svg', width: 24,),
+                              const SizedBox(width: 3,),
+                              Text('Filter',style: TextStyle(fontSize: 11, color: MyColors.primaryBase),)
+                            ],
+                          ),
+                        ),
+                      );
+                    }
                   ),
 
                 ],

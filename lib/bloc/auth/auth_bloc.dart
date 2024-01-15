@@ -36,7 +36,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           }
         }
       }on FirebaseAuthException catch(e){
-        emit(AuthError(error: e.message!));
+        if (e.code == 'email-already-in-use') {
+          emit(AuthError(error: 'Email sudah digunakan. Gunakan email lain.'));
+        }else {
+          emit(AuthError(error: 'Terjadi kesalahan: ${e.message}'));
+        }
       }catch(e){
         emit(AuthError(error: e.toString()));
       }
@@ -52,14 +56,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if(user!.emailVerified){
           final user = credential.user!;
           IdTokenResult token = await user.getIdTokenResult();
-          emit(AuthSuccess(token:  token.token.toString()));
+          String clearToken = '${token.token}';
+          emit(AuthSuccess(token:  clearToken.replaceAll('\n', '')));
         }
         else {
             await user.sendEmailVerification();
             emit(AuthError(error: 'Email belum diverifikasi. Silahkan cek email Anda untuk verifikasi.'));
         }
       }on FirebaseAuthException catch(e){
-        emit(AuthError(error: e.message!));
+        if (e.code == 'user-not-found') {
+          emit(AuthError(error: 'User tidak ditemukan. Silahkan daftar terlebih dahulu.'));
+        } else if (e.code == 'wrong-password') {
+          emit(AuthError(error: 'Password salah. Silahkan coba lagi.'));
+        } else {
+          emit(AuthError(error: 'Terjadi kesalahan: ${e.message}'));
+        }
       }catch(e){
         emit(AuthError(error: e.toString()));
       }
