@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/pages/home_page.dart';
+import 'package:hackfest_mobile/pages/main_work_page.dart';
 import 'package:hackfest_mobile/pages/mycourse_page.dart';
-import 'package:hackfest_mobile/pages/work_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 
 class MainPage extends StatefulWidget {
@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
   List pages =[
     HomePage(),
     MyCoursePage(),
-    WorkPage(),
+    MainWorkPage(),
     Text('profile page'),
   ];
 

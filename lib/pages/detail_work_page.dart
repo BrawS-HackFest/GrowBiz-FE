@@ -5,6 +5,7 @@ import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/card_detail_work.dart';
 import 'package:hackfest_mobile/widgets/desc_work_section.dart';
 import 'package:hackfest_mobile/widgets/my_button.dart';
+import 'package:hackfest_mobile/widgets/profile_work_section.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
 
 class DetailWorkPage extends StatefulWidget {
@@ -97,36 +98,8 @@ class _DetailWorkPageState extends State<DetailWorkPage> {
                 const SizedBox(height: 21,),
                 isDescriptionSelected ?
                 DescWorkSection() :
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.only(left: 12, top: 9, bottom: 9, right: 15),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        padding: EdgeInsets.all(4),
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: MyColors.grey100
-                        ),
-                        child: Icon(Icons.home),
-                      ),
-                      const SizedBox(width: 9,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Pegawai Restoran Begawan', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
-                          Text('Waiters', style: MyTextStyle.captionH5(color: MyColors.grey300),),
-                          Text('2014 - 2019', style: MyTextStyle.captionH5(color: MyColors.grey300),),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
+                ProfileWorkSection(),
+                const SizedBox(height: 30,),
                 SizedBox(
                     width: double.infinity,
                     child: MyButton(text: 'Hubungi', color: MyColors.primaryBase,
@@ -134,6 +107,7 @@ class _DetailWorkPageState extends State<DetailWorkPage> {
                         }
                     )
                 ),
+                const SizedBox(height: 15,),
 
 
 
