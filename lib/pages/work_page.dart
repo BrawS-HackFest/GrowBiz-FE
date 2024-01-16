@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hackfest_mobile/pages/detail_work_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/card_work.dart';
@@ -71,11 +72,37 @@ class _WorkPageState extends State<WorkPage> {
                   ),
                 ],
               ),
+              const Spacer(),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: 126,
+                    child: ElevatedButton(
+                      onPressed: (){},
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: MyColors.whiteBase,
+                        side: BorderSide(color: MyColors.primaryBase),
+                      ),
+                      child: Text('Atur Ulang', style: MyTextStyle.judulH5(color: MyColors.primaryBase),),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 126,
+                    child: ElevatedButton(
+                      onPressed: (){},
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: MyColors.primaryBase,
+                      ),
+                      child: Text('Pakai',style: MyTextStyle.judulH5(color: MyColors.whiteBase),),
+                    ),
+                  )
 
                 ],
-              )
+              ),
+              const Spacer(),
             ],
           ),
         )
@@ -169,7 +196,13 @@ class _WorkPageState extends State<WorkPage> {
                 child: ScrollConfiguration(
                   behavior: NoGlowScrollBehavior(),
                   child: ListView.separated(itemBuilder: (context, index) {
-                    return CardWork();
+                    return CardWork(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                          return DetailWorkPage();
+                        },));
+                      },
+                    );
                   }, separatorBuilder: (context, index) {
                     return const SizedBox(height: 15,);
                   }, itemCount: 7),

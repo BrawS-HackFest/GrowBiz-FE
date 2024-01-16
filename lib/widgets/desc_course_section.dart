@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
-class DescSection extends StatelessWidget {
-  DescSection({super.key, required this.desc, required this.bab});
+class DescCourseSection extends StatelessWidget {
+  DescCourseSection({super.key, required this.desc, required this.bab});
   String desc;
   List<String> bab;
 

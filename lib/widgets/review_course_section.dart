@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
-class ReviewSection extends StatelessWidget {
-  const ReviewSection({super.key});
+class ReviewCourseSection extends StatelessWidget {
+  const ReviewCourseSection({super.key});
 
   @override
   Widget build(BuildContext context) {

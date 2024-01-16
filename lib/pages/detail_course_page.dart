@@ -5,14 +5,13 @@ import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
 import 'package:hackfest_mobile/pages/payment_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
-import 'package:hackfest_mobile/widgets/desc_section.dart';
+import 'package:hackfest_mobile/widgets/desc_course_section.dart';
 import 'package:hackfest_mobile/widgets/my_button.dart';
 import 'package:hackfest_mobile/widgets/my_snackBar.dart';
-import 'package:hackfest_mobile/widgets/review_section.dart';
+import 'package:hackfest_mobile/widgets/review_course_section.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
 import 'package:hackfest_mobile/widgets/skeletons/skeletons_course_detail.dart';
 import 'package:intl/intl.dart';
-import 'package:shimmer/shimmer.dart';
 
 class DetailCoursePage extends StatefulWidget {
   DetailCoursePage({super.key, required this.id});
@@ -134,7 +133,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       height: 10,
                     ),
                     Container(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: MyColors.neutra100,
@@ -159,7 +158,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                                     : MyColors.neutra100,
                                 foregroundColor: MyColors.greyBase,
                               ),
-                              child: Text('Deskripsi'),
+                              child: const Text('Deskripsi'),
                             ),
                           ),
                           const SizedBox(
@@ -182,7 +181,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                                     : MyColors.neutra100,
                                 foregroundColor: MyColors.greyBase,
                               ),
-                              child: Text('Ulasan'),
+                              child: const Text('Ulasan'),
                             ),
                           ),
                         ],
@@ -192,8 +191,8 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       height: 16,
                     ),
                     isDescriptionSelected ?
-                    DescSection(bab: courseSingle.bab,desc: courseSingle.desc,) :
-                    ReviewSection(),
+                    DescCourseSection(bab: courseSingle.bab,desc: courseSingle.desc,) :
+                    ReviewCourseSection(),
                     const SizedBox(height: 19,),
                     SizedBox(
                         width: double.infinity,
