@@ -24,4 +24,8 @@ class RegisterError extends AuthState{
   String error;
   RegisterError({required this.error});
 }
-
+class LogoutSuccess extends AuthState{}
+class LogoutError extends AuthState{
+  String error;
+  LogoutError(this.error);
+}

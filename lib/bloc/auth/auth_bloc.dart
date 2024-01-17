@@ -75,5 +75,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthError(error: e.toString()));
       }
     });
+    on<LogoutEvent>((event, emit)async {
+      try{
+        emit(AuthLoading());
+        await _firebaseAuth.signOut();
+        emit(LogoutSuccess());
+      }catch(e){
+        emit(LogoutError(e.toString()));
+      }
+    });
   }
 }
