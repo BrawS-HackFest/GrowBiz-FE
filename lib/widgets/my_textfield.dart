@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 
 class MyTextField extends StatelessWidget {
-  MyTextField({super.key, required this.hint, required this.controller, required this.icon});
+  MyTextField({super.key, required this.hint, required this.controller, this.icon = null, this.type ='primary'});
 
   final String hint;
   final TextEditingController controller;
-  final IconData icon;
+  final IconData? icon;
+  final String? type;
 
 
   @override
@@ -14,14 +15,17 @@ class MyTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-          hintText: '$hint',
-          hintStyle: TextStyle(color: MyColors.grey300, fontSize: 13),
-          prefixIcon: Icon(icon, color: MyColors.grey300,),
+          hintText: hint,
+          hintStyle: TextStyle(color: icon == 'primary' ? MyColors.grey300 : MyColors.greyBase, fontSize: 13),
+          prefixIcon: icon != null ? Icon(icon, color: MyColors.grey300,) : null,
           filled: true,
-          fillColor: MyColors.neutra100,
+          fillColor: type == 'primary' ? MyColors.neutra100 : MyColors.whiteBase,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none
+              borderSide: type == 'primary' ? BorderSide.none : BorderSide(
+                color: MyColors.grey200,
+                width: 0.3,
+              )
           ),
           contentPadding: EdgeInsets.all(10)
       ),
