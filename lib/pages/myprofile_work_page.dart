@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hackfest_mobile/pages/edit_myprofile_work_page.dart';
-import 'package:hackfest_mobile/pages/myprofile_work_desc_section_page.dart';
+import 'package:hackfest_mobile/pages/edit_myprofile_work_desc_page.dart';
+import 'package:hackfest_mobile/pages/edit_myprofile_work_post_page.dart';
+import 'package:hackfest_mobile/widgets/myprofile_work_desc_section.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
+import 'package:hackfest_mobile/widgets/myprofile_work_post_section.dart';
 
 class MyProfileWorkPage extends StatefulWidget {
   const MyProfileWorkPage({super.key});
@@ -79,8 +81,8 @@ class _MyProfileWorkPageState extends State<MyProfileWorkPage> {
               ),
             ),
             const SizedBox(height: 20,),
-            isDescriptionSelected ? MyProfileWorkDescSectionPage() :
-            Text('Postingan')
+            isDescriptionSelected ? MyProfileWorkDescSection() :
+            MyProfileWorkPostSection()
             ,
 
 
@@ -92,17 +94,23 @@ class _MyProfileWorkPageState extends State<MyProfileWorkPage> {
         decoration: BoxDecoration(),
         child: FloatingActionButton.extended(
             onPressed: (){
-             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-               return EditMyProfileWorkPage();
-             },));
+              if(isDescriptionSelected){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  return EditMyProfileWorkPage();
+                },));
+              }else{
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  return EditMyProfileWorkPostPage();
+                },));
+              }
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
             ),
             backgroundColor: MyColors.primaryBase,
             elevation: 0,
-            label: Text('Ubah', style: MyTextStyle.captionH5(color: MyColors.whiteBase),),
-            icon: SvgPicture.asset('assets/svgs/edit_icon.svg'),
+            label: Text(isDescriptionSelected ? 'Ubah' : 'Buat postingan', style: MyTextStyle.captionH5(color: MyColors.whiteBase),),
+            icon: isDescriptionSelected ? SvgPicture.asset('assets/svgs/edit_icon.svg') : Icon(Icons.add, color: MyColors.whiteBase,),
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
 
         ),

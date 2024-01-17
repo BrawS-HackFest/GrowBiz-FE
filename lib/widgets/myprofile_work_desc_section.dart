@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
-class MyProfileWorkDescSectionPage extends StatelessWidget {
-  const MyProfileWorkDescSectionPage({super.key});
+class MyProfileWorkDescSection extends StatelessWidget {
+  const MyProfileWorkDescSection({super.key});
 
   @override
   Widget build(BuildContext context) {
