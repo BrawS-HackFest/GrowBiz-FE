@@ -29,3 +29,9 @@ class LogoutError extends AuthState{
   String error;
   LogoutError(this.error);
 }
+
+class UpdatePassSuccess extends AuthState{}
+class UpdatePassFailed extends AuthState{
+  String error;
+  UpdatePassFailed(this.error);
+}

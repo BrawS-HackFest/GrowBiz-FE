@@ -84,5 +84,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(LogoutError(e.toString()));
       }
     });
+    on<UpdatePassEvent>((event, emit) async{
+      try{
+        emit(AuthLoading());
+        String password = event.password;
+        String confirmPassword = event.confirmPassword;
+        if(password != confirmPassword){
+          emit(UpdatePassFailed('Password dan konfirmasi password tidak sama, silahkan coba lagi'));
+        }else{
+          await _firebaseAuth.currentUser!.updatePassword(password);
+          emit(UpdatePassSuccess());
+        }
+      }on FirebaseAuthException catch (e){
+        emit(UpdatePassFailed(e.message.toString()));
+      }catch(e){
+        emit(UpdatePassFailed(e.toString()));
+      }
+    });
   }
 }

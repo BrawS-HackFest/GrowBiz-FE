@@ -18,3 +18,9 @@ class LoginEvent extends AuthEvent{
 }
 
 class LogoutEvent extends AuthEvent{}
+
+class UpdatePassEvent extends AuthEvent{
+  String password;
+  String confirmPassword;
+  UpdatePassEvent({required this.password, required this.confirmPassword});
+}
