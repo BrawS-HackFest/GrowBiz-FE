@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackfest_mobile/pages/edit_myprofile_page.dart';
+import 'package:hackfest_mobile/pages/update_mypassword_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 
@@ -52,7 +53,14 @@ class AccountSettingsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Icon(Icons.navigate_next)
+                GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                        return UpdateMyPasswordPage();
+                      },));
+                    },
+                    child: Icon(Icons.navigate_next)
+                )
               ],
             ),
 
