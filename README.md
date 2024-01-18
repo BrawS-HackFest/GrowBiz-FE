@@ -9,9 +9,10 @@ This repository is used to store the source code of our application, especially 
 
 ## 💻 Features
 - Authentication ✔️
-- Get all course ✔️
-- Get single course ✔️
 - Buy course for learning ✔️
+- Watching course videos ✔️
+- Reading articles and leaving comments ✔️
+- Looking for employees to work ✔️
 
 ## 🔧 Tech
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
