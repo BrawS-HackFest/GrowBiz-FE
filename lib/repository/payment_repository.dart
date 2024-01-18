@@ -37,7 +37,6 @@ class PaymentRepository{
       final response =await dio.get('/transactions/$id');
       if (response.statusCode == 200) {
         final paymentRes = response.data['data'];
-        print(paymentRes);
         return PaymentModel(invCode: paymentRes['va_number'], amount: paymentRes['amount'], method: paymentRes['method']);
       } else {
         throw 'Failed to perform payment request: ${response.statusCode}';

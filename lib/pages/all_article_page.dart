@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/article/article_bloc.dart';
+import 'package:hackfest_mobile/pages/detail_article_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/card_article.dart';
@@ -59,6 +60,13 @@ class _AllArticlePageState extends State<AllArticlePage> {
                               image: articleData[index].pict,
                               desc: articleData[index].desc,
                               id: articleData[index].id,
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                  return DetailArticlePage(id: articleData[index].id);
+                                },)).then((value) => setState(() {
+                                  context.read<ArticleBloc>().add(AllArticleFetch());
+                                },));
+                              },
                             );
                           }, separatorBuilder: (context, index) {
                         return const SizedBox(height: 15,);

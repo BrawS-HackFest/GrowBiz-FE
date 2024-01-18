@@ -22,4 +22,14 @@ class ArticleRepository{
       throw e.toString();
     }
   }
+  Future userCommentArticle ({required int id, required String comment})async{
+    try{
+      final response = await dio.post('/article/$id/create-comment', data: {
+        "comment" : comment
+      });
+      return response.data;
+    }catch(e){
+      throw e.toString();
+    }
+  }
 }

@@ -19,3 +19,8 @@ class CourseFailed extends CourseState{
   String error;
   CourseFailed(this.error);
 }
+
+class CourseUserSuccess extends CourseState{
+  final List<CourseUserModel> courseUserModel;
+  CourseUserSuccess({required this.courseUserModel});
+}

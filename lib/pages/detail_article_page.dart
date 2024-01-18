@@ -14,6 +14,7 @@ class DetailArticlePage extends StatefulWidget {
 }
 
 class _DetailArticlePageState extends State<DetailArticlePage> {
+  TextEditingController commentController = TextEditingController();
   @override
   void initState(){
     super.initState();
@@ -26,10 +27,20 @@ class _DetailArticlePageState extends State<DetailArticlePage> {
         title: Text('Artikel', style: MyTextStyle.judulH5(color: MyColors.blackBase)),
         centerTitle: true,
       ),
-      body: BlocBuilder<ArticleBloc, ArticleState>(
+      body: BlocConsumer<ArticleBloc, ArticleState>(
+              listener: (context, state) {
+                if(state is ArticleCommentsSuccess){
+                  mySnackBar(context, 'berhasil komen :)');
+                  context.read<ArticleBloc>().add(ArticleSingleFetch(id: widget.id));
+                  commentController.clear();
+                }
+              },
               builder: (context, state) {
                 if(state is ArticleFailed){
                   return Text(state.error);
+                }
+                if(state is ArticleLoading){
+                  return Center(child: CircularProgressIndicator(),);
                 }
                if(state is ArticleSingleSuccess){
                  final articleData = state.articleModel;
@@ -87,34 +98,48 @@ class _DetailArticlePageState extends State<DetailArticlePage> {
                                child: Text('Komentar',style: MyTextStyle.buttonH3(color: MyColors.blackBase),)
                            ),
                            const SizedBox(height: 9,),
-                           Container(
-                             child: Row(
-                               children: [
-                                 Container(
-                                   width:43,
-                                   height: 43,
-                                   decoration: BoxDecoration(
-                                       shape: BoxShape.circle
-                                   ),
-                                   clipBehavior: Clip.hardEdge,
-                                   child: Image.asset('assets/images/profile_hackfest.png', fit: BoxFit.cover,),
-                                 ),
-                                 const SizedBox(width: 15,),
-                                 Column(
-                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                   children: [
-                                     Text('Adinda Yulia', style: MyTextStyle.judulH4(color: MyColors.blackBase),),
-                                     Container(
-                                       width: 250,
-                                       child: Text('Inovasi bisnisnya sangat keren. Semoga dapat menginovasi anak muda saat ini.',
-                                         style: MyTextStyle.captionH5(color: MyColors.greyBase),
-                                         textAlign: TextAlign.justify,
-                                       ),
-                                     )
-                                   ],
-                                 )
-                               ],
-                             ),
+                           SizedBox(
+                             height:140,
+                               child:ListView.separated(itemBuilder: (context, index) {
+                                 final comments = articleData.comment;
+                                 if(comments != null){
+                                   return Container(
+                                     child: Row(
+                                       children: [
+                                         Container(
+                                           width:43,
+                                           height: 43,
+                                           decoration: BoxDecoration(
+                                               shape: BoxShape.circle
+                                           ),
+                                           clipBehavior: Clip.hardEdge,
+                                           child: Image.asset('assets/images/profile_hackfest.png', fit: BoxFit.cover,),
+                                         ),
+                                         const SizedBox(width: 15,),
+                                         Column(
+                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                           children: [
+                                             Text(comments[index]['User']['username'], style: MyTextStyle.judulH4(color: MyColors.blackBase),),
+                                             Container(
+                                               width: 250,
+                                               child: Text(comments[index]['comment'],
+                                                 style: MyTextStyle.captionH5(color: MyColors.greyBase),
+                                                 textAlign: TextAlign.justify,
+                                               ),
+                                             )
+                                           ],
+                                         )
+                                       ],
+                                     ),
+                                   );
+                                 }
+                                 else{
+                                   return Text('Tidak ada article');
+                                 }
+
+                               }, separatorBuilder: (context, index) {
+                                 return const SizedBox(height: 16,);
+                               }, itemCount: articleData.comment?.length ?? 0)
                            ),
                            const SizedBox(height: 27,),
                            Container(
@@ -132,6 +157,7 @@ class _DetailArticlePageState extends State<DetailArticlePage> {
                                  TextField(
                                    minLines: 4,
                                    maxLines: 4,
+                                   controller: commentController,
                                    decoration: InputDecoration(
                                        hintText: 'Tulis tanggapan anda..',
                                        hintStyle: MyTextStyle.captionH5(color: MyColors.grey200),
@@ -146,14 +172,19 @@ class _DetailArticlePageState extends State<DetailArticlePage> {
                                  Align(
                                    alignment: Alignment.centerRight,
                                    child: ElevatedButton(
-                                       onPressed: (){},
+                                       onPressed: (){
+                                         context.read<ArticleBloc>().add(ArticleCommentUser(
+                                           id: articleData.id,
+                                           comment: commentController.text
+                                         ));
+                                       },
                                        style: ElevatedButton.styleFrom(
                                            elevation: 0,
                                            visualDensity: VisualDensity(vertical: -1),
                                            foregroundColor: MyColors.whiteBase,
                                            backgroundColor: MyColors.primaryBase
                                        ),
-                                       child: Text('Kirim')
+                                       child: Text(state is ArticleCommentLoading ? 'Loading...' : 'Kirim')
                                    ),
                                  )
                                ],

@@ -20,3 +20,6 @@ class ArticleSingleSuccess extends ArticleState{
   final ArticleModel articleModel;
   ArticleSingleSuccess({required this.articleModel});
 }
+
+class ArticleCommentsSuccess extends ArticleState{}
+class ArticleCommentLoading extends ArticleState{}

@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/article/article_bloc.dart';
 import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
 import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
-import 'package:hackfest_mobile/bloc/user/user_bloc.dart';
 import 'package:hackfest_mobile/models/categories_model.dart';
 import 'package:hackfest_mobile/pages/all_article_page.dart';
 import 'package:hackfest_mobile/pages/all_course_page.dart';
+import 'package:hackfest_mobile/pages/detail_article_page.dart';
 import 'package:hackfest_mobile/pages/detail_course_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
@@ -187,6 +187,8 @@ class _HomePageState extends State<HomePage> {
                         onTap: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return AllArticlePage();
+                          },)).then((value) => setState(() {
+                            context.read<ArticleBloc>().add(ArticleSingleFetch(id: 1));
                           },));
                         },
                         child: Text('Lihat semua', style: MyTextStyle.captionH5(color: MyColors.primaryBase),)
@@ -203,6 +205,13 @@ class _HomePageState extends State<HomePage> {
                         image: articleData.pict,
                         title: articleData.title,
                         id: 1,
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return DetailArticlePage(id: 1);
+                          },)).then((value) => setState(() {
+                            context.read<ArticleBloc>().add(ArticleSingleFetch(id: 1));
+                          },));
+                        },
                       );
                     }else{
                       return Container();

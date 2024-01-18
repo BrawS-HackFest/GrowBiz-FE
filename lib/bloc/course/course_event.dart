@@ -9,3 +9,8 @@ class CourseSingleFetched extends CourseEvent{
   int id;
   CourseSingleFetched({required this.id});
 }
+
+class CourseUserFetched extends CourseEvent{
+  String token;
+  CourseUserFetched({required this.token});
+}

@@ -73,3 +73,23 @@ class DetailCourseModel {
     );
   }
 }
+
+class CourseUserData{
+  final List<CourseUserModel> courseUserData;
+  CourseUserData({required this.courseUserData});
+
+  factory CourseUserData.fromJson(Map<String, dynamic> json) {
+    final List<dynamic> data = json['data'];
+    List<CourseUserModel> courseUser = data.map((courseData) => CourseUserModel.fromJson(courseData)).toList();
+    return CourseUserData(courseUserData: courseUser);
+  }
+}
+class CourseUserModel{
+  final String pict;
+  final String title;
+
+  CourseUserModel({required this.pict, required this.title});
+
+  factory CourseUserModel.fromJson(Map<String,dynamic>json)=>
+      CourseUserModel(pict: json['pict'], title: json['title']);
+}

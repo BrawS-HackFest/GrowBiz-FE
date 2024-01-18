@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:hackfest_mobile/pages/detail_article_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 
 class CardArticle extends StatelessWidget {
-   CardArticle({super.key, required this.image, required this.title, required this.desc, required this.id});
+   CardArticle({super.key, required this.image, required this.title, required this.desc, required this.id, required this.onTap});
    final int id;
    final String image;
    final String title;
    final String desc;
+   VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return  Row(
       children: [
         GestureDetector(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context){
-              return DetailArticlePage(id: id,);
-            }));
-          },
+          onTap:onTap,
           child: Container(
             width: 76,
             height: 76,
@@ -38,10 +34,10 @@ class CardArticle extends StatelessWidget {
           width: 220,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(title, style: MyTextStyle.judulH5(color: MyColors.blackBase),),
-              const SizedBox(height: 10,),
-              Text(desc.substring(1,15),style: MyTextStyle.captionH5(color: MyColors.grey200),textAlign: TextAlign.justify,)
+              Text('${desc.substring(0,50)}...',style: MyTextStyle.captionH5(color: MyColors.grey200),textAlign: TextAlign.justify,)
             ],
           ),
         )

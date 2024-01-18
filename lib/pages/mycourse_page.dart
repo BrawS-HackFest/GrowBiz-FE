@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
+import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
 import 'package:hackfest_mobile/bloc/payment/payment_bloc.dart';
 import 'package:hackfest_mobile/pages/detail_payment_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
@@ -23,6 +24,11 @@ class _MyCoursePageState extends State<MyCoursePage> {
   TextEditingController searchController = TextEditingController();
 
   int _currentPageIndex = 0;
+  String tokenId='';
+  @override void initState() {
+    super.initState();
+    context.read<CourseBloc>().add(CourseUserFetched(token: tokenId));
+  }
   @override
   Widget build(BuildContext context) {
     String token='${(context.read<AuthBloc>().state as AuthSuccess).token}';
@@ -58,6 +64,7 @@ class _MyCoursePageState extends State<MyCoursePage> {
                         id: 0,
                         selected: _currentPageIndex,
                         onTap: (){
+                          context.read<CourseBloc>().add(CourseUserFetched(token: token));
                           setState(() {
                             _currentPageIndex = 0;
                           });
@@ -85,19 +92,35 @@ class _MyCoursePageState extends State<MyCoursePage> {
                   ),
                   const SizedBox(height: 20,),
                   _currentPageIndex == 0 ?
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: NoGlowScrollBehavior(),
-                      child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return CardMyCourse();
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(height: 10,);
-                        },
-                        itemCount: 3,
-                      ),
-                    ),
+                  BlocBuilder<CourseBloc, CourseState>(
+                    builder: (context, state) {
+                      if(state is CourseUserSuccess){
+                        final courseData = state.courseUserModel;
+                        return Expanded(
+                          child: ScrollConfiguration(
+                            behavior: NoGlowScrollBehavior(),
+                            child: ListView.separated(
+                              itemBuilder: (context, index) {
+                                return CardMyCourse(
+                                  title:courseData[index].title ,
+                                  image: courseData[index].pict,
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(height: 10,);
+                              },
+                              itemCount: courseData.length,
+                            ),
+                          ),
+                        );
+                      }
+                      if(state is CourseFailed){
+                        return Text(state.error);
+                      }
+                      else{
+                        return Text('error');
+                      }
+                    },
                   ):
                   BlocBuilder<PaymentBloc, PaymentState>(
                     builder: (context, state) {

@@ -5,8 +5,9 @@ import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 
 class CardMyCourse extends StatelessWidget {
-  const CardMyCourse({super.key});
-
+  CardMyCourse({super.key, required this.image, required this.title});
+  final String image;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +40,7 @@ class CardMyCourse extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: DecorationImage(
-                      image:AssetImage('assets/images/popular1.png'),
+                      image:NetworkImage(image),
                       fit: BoxFit.cover
                   ),
                 ),
@@ -65,7 +66,7 @@ class CardMyCourse extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8,),
-              Text('Menjadikan Hobi Sebagai Penghasilan', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
+              Text(title, style: MyTextStyle.judulH5(color: MyColors.blackBase),),
               const SizedBox(height: 7,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

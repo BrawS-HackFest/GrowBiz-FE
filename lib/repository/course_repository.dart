@@ -24,4 +24,14 @@ class CourseRepository{
       throw e.toString();
     }
   }
+  
+  Future<CourseUserData> getMyCourse (String token) async{
+    try{
+      final response = await dio.get('/courses/courses-by-user', options: Options(headers: {"Authorization": "Bearer $token"}));
+      final data = response.data;
+      return CourseUserData.fromJson(data);
+    }catch(e){
+      throw e.toString();
+    }
+  }
 }
