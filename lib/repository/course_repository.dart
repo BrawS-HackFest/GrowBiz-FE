@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:hackfest_mobile/models/course_model.dart';
-import 'package:http/http.dart'as http;
 class CourseRepository{
-  final dio = Dio(BaseOptions(baseUrl:'https://c4eb-104-28-245-127.ngrok-free.app'));
+  final dio = Dio(BaseOptions(baseUrl:'https://0bbf-104-28-245-128.ngrok-free.app'));
 
   Future<DataCourse> getAllCourse ()async{
     try{

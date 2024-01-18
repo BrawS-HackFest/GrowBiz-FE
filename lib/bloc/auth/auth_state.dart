@@ -9,7 +9,8 @@ class AuthLoading extends AuthState{}
 
 class AuthSuccess extends AuthState{
   String token;
-  AuthSuccess({required this.token});
+  UserModel userModel;
+  AuthSuccess({required this.token, required this.userModel});
 
   get state => token;
 }

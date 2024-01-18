@@ -4,7 +4,11 @@ import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 
 class CardArticle extends StatelessWidget {
-  const CardArticle({super.key});
+   CardArticle({super.key, required this.image, required this.title, required this.desc, required this.id});
+   final int id;
+   final String image;
+   final String title;
+   final String desc;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,7 @@ class CardArticle extends StatelessWidget {
         GestureDetector(
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context){
-              return DetailArticle();
+              return DetailArticlePage(id: id,);
             }));
           },
           child: Container(
@@ -23,7 +27,7 @@ class CardArticle extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                    image: AssetImage('assets/images/umkm1.png'),
+                    image: NetworkImage('$image'),
                     fit: BoxFit.cover
                 )
             ),
@@ -35,9 +39,9 @@ class CardArticle extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Memajukan UMKM Lokal : Penda...', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
+              Text(title, style: MyTextStyle.judulH5(color: MyColors.blackBase),),
               const SizedBox(height: 10,),
-              Text('Ditengah persaingan usaha yang sengit, UMKM harus dapat terus mempertahankan eksiste...',style: MyTextStyle.captionH5(color: MyColors.grey200),textAlign: TextAlign.justify,)
+              Text(desc.substring(1,15),style: MyTextStyle.captionH5(color: MyColors.grey200),textAlign: TextAlign.justify,)
             ],
           ),
         )

@@ -7,11 +7,16 @@ class ArticleInitial extends ArticleState {}
 class ArticleLoading extends ArticleState{}
 
 class AllArticleSuccess extends ArticleState {
-  List<ArticleModel> articleModel;
+  final List<ArticleModel> articleModel;
   AllArticleSuccess({required this.articleModel});
 }
 
-class AllArticleFailed extends ArticleState{
+class ArticleFailed extends ArticleState{
   String error;
-  AllArticleFailed(this.error);
+  ArticleFailed(this.error);
+}
+
+class ArticleSingleSuccess extends ArticleState{
+  final ArticleModel articleModel;
+  ArticleSingleSuccess({required this.articleModel});
 }

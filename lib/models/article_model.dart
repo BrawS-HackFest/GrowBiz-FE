@@ -1,13 +1,13 @@
-class ArticleData{
+class ArticleData {
   final List<ArticleModel> articleData;
+
   ArticleData({required this.articleData});
 
   factory ArticleData.fromJson(Map<String, dynamic> json)=>
       ArticleData(
         articleData: List.from(
-            json["data"].map((article) => ArticleModel.fromJson(article))),
+            json["data"].map((articleDatas) => ArticleModel.fromJson(articleDatas))),
       );
-
 }
 class ArticleModel{
   int id;

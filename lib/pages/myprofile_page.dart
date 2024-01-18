@@ -47,13 +47,22 @@ class _MyProfilePageState extends State<MyProfilePage> {
                         child: Image.asset('assets/images/profile_hackfest.png', fit: BoxFit.cover,),
                       ),
                       const SizedBox(width: 8,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Izra Bintang', style: MyTextStyle.buttonH3(color: MyColors.blackBase),),
-                          Text('izrabintang@gmail.com', style: MyTextStyle.captionH5(color: MyColors.grey300),),
-                        ],
-                      )
+                      BlocBuilder<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            if(state is AuthSuccess){
+                              final dataUser = state.userModel;
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(dataUser.username, style: MyTextStyle.buttonH3(color: MyColors.blackBase),),
+                                  Text(dataUser.email, style: MyTextStyle.captionH5(color: MyColors.grey300),),
+                                ],
+                              );
+                            }else{
+                              return Text('User', style: MyTextStyle.buttonH3(color: MyColors.blackBase),);
+                            }
+                          },
+                        )
                     ],
                   ),
                   const SizedBox(height: 38,),

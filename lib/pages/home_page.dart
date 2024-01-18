@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hackfest_mobile/bloc/article/article_bloc.dart';
 import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
 import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
+import 'package:hackfest_mobile/bloc/user/user_bloc.dart';
 import 'package:hackfest_mobile/models/categories_model.dart';
 import 'package:hackfest_mobile/pages/all_article_page.dart';
 import 'package:hackfest_mobile/pages/all_course_page.dart';
@@ -29,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     context.read<CourseBloc>().add(CourseFetched());
+    context.read<ArticleBloc>().add(ArticleSingleFetch(id: 1));
   }
 
   @override
@@ -50,8 +53,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     BlocBuilder<AuthBloc, AuthState>(
                       builder: (context, state) {
-                        //print((state as AuthSuccess).token);
-                        return Text('Halo,izzz', style: MyTextStyle.judulH3(color: MyColors.blackBase),);
+                        if(state is AuthSuccess){
+                          return Text('Halo, ${state.userModel.username}', style: MyTextStyle.judulH3(color: MyColors.blackBase),);
+                        }
+                        else{
+                          return Text('Halo', style: MyTextStyle.judulH3(color: MyColors.blackBase),);
+                        }
                       },
                     ),
                     Container(
@@ -187,7 +194,21 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 7,),
-                CardArticle(),
+                BlocBuilder<ArticleBloc, ArticleState>(
+                  builder: (context, state) {
+                    if(state is ArticleSingleSuccess){
+                      final articleData = state.articleModel;
+                      return CardArticle(
+                        desc: articleData.desc,
+                        image: articleData.pict,
+                        title: articleData.title,
+                        id: 1,
+                      );
+                    }else{
+                      return Container();
+                    }
+  },
+),
 
 
 

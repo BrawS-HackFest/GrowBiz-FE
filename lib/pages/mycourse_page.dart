@@ -10,6 +10,7 @@ import 'package:hackfest_mobile/widgets/card_waiting_payment.dart';
 import 'package:hackfest_mobile/widgets/my_textfield.dart';
 import 'package:hackfest_mobile/widgets/navigation_top.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:hackfest_mobile/widgets/skeletons/skeletons_card_waiting_payment.dart';
 import 'package:intl/intl.dart';
 
 class MyCoursePage extends StatefulWidget {
@@ -128,7 +129,7 @@ class _MyCoursePageState extends State<MyCoursePage> {
                           return Text('Tidak ada data', style: MyTextStyle.judulH4(color: MyColors.blackBase),);
                         }
                       }else{
-                        return Text('hello waiting');
+                        return SkeletonsCardWaitingPayment();
                       }
 
                     },

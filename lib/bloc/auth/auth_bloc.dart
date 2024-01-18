@@ -1,13 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hackfest_mobile/models/user_model.dart';
 import 'package:hackfest_mobile/repository/auth_repository.dart';
+import 'package:hackfest_mobile/repository/user_repository.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final AuthRepository authRepository = AuthRepository();
+  final UserRepository userRepository = UserRepository();
   AuthBloc() : super(AuthInitial()) {
     on<RegisterEvent>((event, emit) async{
       try{
@@ -57,7 +60,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           final user = credential.user!;
           IdTokenResult token = await user.getIdTokenResult();
           String clearToken = '${token.token}';
-          emit(AuthSuccess(token:  clearToken.replaceAll('\n', '')));
+          clearToken = clearToken.replaceAll('\n', '');
+          final userData = await userRepository.getUser(clearToken);
+          emit(AuthSuccess(token:clearToken, userModel: userData));
         }
         else {
             await user.sendEmailVerification();
@@ -72,6 +77,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthError(error: 'Terjadi kesalahan: ${e.message}'));
         }
       }catch(e){
+        print(e.toString());
         emit(AuthError(error: e.toString()));
       }
     });

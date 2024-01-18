@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:hackfest_mobile/models/payment_model.dart';
 
 class PaymentRepository{
-  Dio dio = Dio(BaseOptions(baseUrl:'https://c4eb-104-28-245-127.ngrok-free.app'));
+  Dio dio = Dio(BaseOptions(baseUrl:'https://0bbf-104-28-245-128.ngrok-free.app'));
 
   Future<PaymentModel> paymentRequest ({required String token, required int amount, required int courseId, required String method})async{
     try{

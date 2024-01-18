@@ -15,9 +15,20 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
       try{
         emit(ArticleLoading());
         final articleData = await articleRepository.getAllArticle();
+        print(articleData.articleData);
         emit(AllArticleSuccess(articleModel: articleData.articleData));
       }catch(e){
-        emit(AllArticleFailed(e.toString()));
+        emit(ArticleFailed(e.toString()));
+      }
+    });
+    on<ArticleSingleFetch>((event, emit) async{
+      try{
+        emit(ArticleLoading());
+        final articleSingleData = await articleRepository.getSingleArticle(event.id);
+        emit(ArticleSingleSuccess(articleModel: articleSingleData));
+
+      }catch(e){
+        emit(ArticleFailed(e.toString()));
       }
     });
   }
