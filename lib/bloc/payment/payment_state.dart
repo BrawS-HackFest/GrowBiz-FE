@@ -15,3 +15,21 @@ class PaymentFailed extends PaymentState{
   PaymentFailed(this.error);
 }
 class PaymentLoading extends PaymentState{}
+
+class WaitingPaymentUserSuccess extends PaymentState{
+  final List<WaitingPaymentModel> waitingPayment;
+  WaitingPaymentUserSuccess({required this.waitingPayment});
+}
+class WaitingPaymentUserFailed extends PaymentState{
+  String error;
+  WaitingPaymentUserFailed(this.error);
+}
+
+class DetailPaymentUserSuccess extends PaymentState{
+  PaymentModel paymentModel;
+  DetailPaymentUserSuccess({required this.paymentModel});
+}
+class DetailPaymentUserFailed extends PaymentState{
+  String error;
+  DetailPaymentUserFailed(this.error);
+}

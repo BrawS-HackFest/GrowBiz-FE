@@ -2,14 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
+import 'package:intl/intl.dart';
 class CardDetailCourse extends StatelessWidget {
-  const CardDetailCourse({super.key});
+  CardDetailCourse({super.key,required this.image, required this.rating, required this.title, required this.numberOfPeople, required this.categories, required this.price, required this.onTap});
+  final String image;
+  final String rating;
+  final String title;
+  final String numberOfPeople;
+  final int price;
+  final String categories;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormater = NumberFormat.currency(locale: 'id_ID',symbol: 'Rp.');
     return Container(
       width: double.infinity,
       height: 250,
+      margin: EdgeInsets.symmetric(horizontal: 22),
       decoration: ShapeDecoration(
           color: Colors.white,
           shape: RoundedRectangleBorder(
@@ -28,7 +38,7 @@ class CardDetailCourse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: (){},
+            onTap: onTap,
             child: Container(
               width: double.infinity,
               height: 180,
@@ -36,7 +46,7 @@ class CardDetailCourse extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                    image: AssetImage('assets/images/popular1.png'),
+                    image: NetworkImage('$image'),
                     fit: BoxFit.cover
                 ),
               ),
@@ -53,7 +63,7 @@ class CardDetailCourse extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SvgPicture.asset('assets/svgs/star_icon.svg',color: MyColors.secondaryBase,width: 13),
-                        Text('4,8', style: MyTextStyle.captionH5(color: MyColors.blackBase),)
+                        Text(rating, style: MyTextStyle.captionH5(color: MyColors.blackBase),)
                       ],
                     ),
                   ),
@@ -67,7 +77,7 @@ class CardDetailCourse extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Dasar Digital Marketing', style: MyTextStyle.judulH5(color: MyColors.blackBase),),
+                Text(title, style: MyTextStyle.judulH5(color: MyColors.blackBase),),
                 Text('teratas', style: MyTextStyle.captionH5(color: MyColors.secondaryBase))
               ],
             ),
@@ -83,7 +93,7 @@ class CardDetailCourse extends StatelessWidget {
                     children: [
                       SvgPicture.asset('assets/svgs/person_icon.svg', color: MyColors.grey200,width: 13,),
                       const SizedBox(width: 5,),
-                      Text('2.308', style: MyTextStyle.judulH5(color: MyColors.grey200),),
+                      Text(numberOfPeople, style: MyTextStyle.judulH5(color: MyColors.grey200),),
                     ],
                   ),
                 ),
@@ -93,7 +103,7 @@ class CardDetailCourse extends StatelessWidget {
                     children: [
                       SvgPicture.asset('assets/svgs/money_icon.svg'),
                       const SizedBox(width: 5,),
-                      Text('Rp.40.000', style: MyTextStyle.judulH5(color: MyColors.primaryBase),),
+                      Text(currencyFormater.format(price).toString().replaceAll(RegExp(r',00$'), ''), style: MyTextStyle.judulH5(color: MyColors.primaryBase),),
                     ],
                   ),
                 )

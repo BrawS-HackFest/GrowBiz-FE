@@ -7,7 +7,7 @@ class AuthRepository{
     try{
       print("uuid : $uid");
       print('email : $email');
-      var response = await dio.post('https://74ff-180-248-32-238.ngrok-free.app/create-user',data: {
+      var response = await dio.post('https://c4eb-104-28-245-127.ngrok-free.app/create-user',data: {
         'id':uid,
         'email':email
       });

@@ -144,7 +144,9 @@ class _HomePageState extends State<HomePage> {
                                       onTap: (){
                                     Navigator.of(context).push(MaterialPageRoute(builder: (context){
                                       return DetailCoursePage(id: courseDatas[index].id);
-                                    })).then((value){setState(() {});});
+                                    })).then((value){setState(() {
+                                      context.read<CourseBloc>().add(CourseFetched());
+                                    });});
                                   },
                                   );
                             }, separatorBuilder: (context, index) {
