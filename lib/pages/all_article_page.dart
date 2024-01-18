@@ -7,6 +7,7 @@ import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/card_article.dart';
 import 'package:hackfest_mobile/widgets/my_textfield.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:hackfest_mobile/widgets/skeletons/skeletons_card_article.dart';
 
 class AllArticlePage extends StatefulWidget {
   AllArticlePage({super.key});
@@ -43,7 +44,7 @@ class _AllArticlePageState extends State<AllArticlePage> {
             BlocBuilder<ArticleBloc, ArticleState>(
               builder: (context, state) {
                 if(state is ArticleLoading){
-                  return Text('laoding...');
+                  return const SkeletonsCardArticle();
                 }
                 if(state is ArticleFailed){
                   return Text(state.error);

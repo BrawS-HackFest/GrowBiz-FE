@@ -46,7 +46,10 @@ class SkeletonsCardWaitingPayment extends StatelessWidget {
                     Container(
                       width: 74,
                       height: 32,
-                      color: MyColors.neutra100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: MyColors.neutra100,
+                      ),
                     ),
                   ],
                 ),

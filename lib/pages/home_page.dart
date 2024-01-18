@@ -15,6 +15,7 @@ import 'package:hackfest_mobile/widgets/card_popular_course.dart';
 import 'package:hackfest_mobile/widgets/filter_categories.dart';
 import 'package:hackfest_mobile/widgets/my_textfield.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:hackfest_mobile/widgets/skeletons/skeletons_card_article.dart';
 import 'package:hackfest_mobile/widgets/skeletons/skeletons_card_popular_course.dart';
 
 class HomePage extends StatefulWidget {
@@ -214,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       );
                     }else{
-                      return Container();
+                      return const SkeletonsCardArticle();
                     }
   },
 ),

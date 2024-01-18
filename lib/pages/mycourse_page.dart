@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
 import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
 import 'package:hackfest_mobile/bloc/payment/payment_bloc.dart';
 import 'package:hackfest_mobile/pages/detail_payment_page.dart';
@@ -11,11 +10,13 @@ import 'package:hackfest_mobile/widgets/card_waiting_payment.dart';
 import 'package:hackfest_mobile/widgets/my_textfield.dart';
 import 'package:hackfest_mobile/widgets/navigation_top.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:hackfest_mobile/widgets/skeletons/skeletons_card_mycourse.dart';
 import 'package:hackfest_mobile/widgets/skeletons/skeletons_card_waiting_payment.dart';
 import 'package:intl/intl.dart';
 
 class MyCoursePage extends StatefulWidget {
-  MyCoursePage({super.key});
+  MyCoursePage({super.key, required this.token});
+  String token;
   @override
   State<MyCoursePage> createState() => _MyCoursePageState();
 }
@@ -24,15 +25,12 @@ class _MyCoursePageState extends State<MyCoursePage> {
   TextEditingController searchController = TextEditingController();
 
   int _currentPageIndex = 0;
-  String tokenId='';
   @override void initState() {
     super.initState();
-    context.read<CourseBloc>().add(CourseUserFetched(token: tokenId));
+    context.read<CourseBloc>().add(CourseUserFetched(token: widget.token));
   }
   @override
   Widget build(BuildContext context) {
-    String token='${(context.read<AuthBloc>().state as AuthSuccess).token}';
-    token = token.replaceAll('\n', '');
 
     return Scaffold(
       body: SafeArea(
@@ -64,7 +62,7 @@ class _MyCoursePageState extends State<MyCoursePage> {
                         id: 0,
                         selected: _currentPageIndex,
                         onTap: (){
-                          context.read<CourseBloc>().add(CourseUserFetched(token: token));
+                          context.read<CourseBloc>().add(CourseUserFetched(token: widget.token));
                           setState(() {
                             _currentPageIndex = 0;
                           });
@@ -75,7 +73,7 @@ class _MyCoursePageState extends State<MyCoursePage> {
                         id: 1,
                         selected: _currentPageIndex,
                         onTap: (){
-                          context.read<PaymentBloc>().add(WaitingPaymentUserFetch(token:token.toString() ));
+                          context.read<PaymentBloc>().add(WaitingPaymentUserFetch(token:widget.token.toString() ));
                           setState(() {
                             _currentPageIndex = 1;
                           });
@@ -118,7 +116,7 @@ class _MyCoursePageState extends State<MyCoursePage> {
                         return Text(state.error);
                       }
                       else{
-                        return Text('error');
+                        return const SkeletonsCardMyCourse();
                       }
                     },
                   ):

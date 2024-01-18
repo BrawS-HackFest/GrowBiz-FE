@@ -5,6 +5,8 @@ import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/my_snackBar.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 class DetailArticlePage extends StatefulWidget {
   DetailArticlePage({super.key, required this.id});
   int id;
@@ -40,7 +42,9 @@ class _DetailArticlePageState extends State<DetailArticlePage> {
                   return Text(state.error);
                 }
                 if(state is ArticleLoading){
-                  return Center(child: CircularProgressIndicator(),);
+                  return Center(child: SpinKitWanderingCubes(
+                    color: MyColors.primaryBase,
+                  ),);
                 }
                if(state is ArticleSingleSuccess){
                  final articleData = state.articleModel;
