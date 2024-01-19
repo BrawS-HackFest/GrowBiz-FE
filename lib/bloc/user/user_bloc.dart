@@ -20,5 +20,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserFailed(e.toString()));
       }
     });
+    on<UserWorkDetailFetched>((event, emit) async{
+      try{
+        emit(UserLoading());
+        final userWorkDetail = await userRepository.getUserWorkDetail(event.id);
+        emit(UserWorkDetailSuccess(userWorkDetail: userWorkDetail));
+      }catch(e){
+        emit(UserFailed(e.toString()));
+      }
+    });
   }
 }

@@ -23,4 +23,14 @@ class UserRepository{
       throw e.toString();
     }
   }
+  
+  Future<UserWorkDetail> getUserWorkDetail(String id)async{
+    try{
+      final response = await dio.get('/users/check-user?id=$id');
+      return UserWorkDetail.fromJson(response.data);
+    }catch(e){
+      throw e.toString();
+    }
+    
+  }
 }

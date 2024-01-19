@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 class CardDetailWork extends StatelessWidget {
-  const CardDetailWork({super.key});
+  CardDetailWork({super.key, required this.name, required this.work});
+  String name;
+  String work;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,9 @@ class CardDetailWork extends StatelessWidget {
           child: Image.asset('assets/images/profile_hackfest.png', fit: BoxFit.cover,),
         ),
         const SizedBox(height: 10,),
-        Text('Pegawai Restoran', style: MyTextStyle.buttonH3(color: MyColors.blackBase),),
+        Text(work, style: MyTextStyle.buttonH3(color: MyColors.blackBase),),
         const SizedBox(height: 5,),
-        Text('Syahda Reeca', style: MyTextStyle.captionH5(color: MyColors.greyBase),),
+        Text(name, style: MyTextStyle.captionH5(color: MyColors.greyBase),),
         const SizedBox(height: 9,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

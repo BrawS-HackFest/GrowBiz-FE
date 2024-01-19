@@ -52,3 +52,26 @@ class UserWorkData{
       );
 
 }
+
+class UserWorkDetail{
+  final String name;
+  final String email;
+  final String number;
+  List<dynamic> categories;
+
+  UserWorkDetail({
+    required this.name,
+    required this.number,
+    required this.email,
+    required this.categories
+  });
+
+  factory UserWorkDetail.fromJson(Map<String, dynamic> json){
+    final userData = json['data'];
+    return UserWorkDetail(
+        name: userData['username'],
+        number: userData['number'],
+        email: userData['email'],
+        categories: userData['categories']);
+  }
+}

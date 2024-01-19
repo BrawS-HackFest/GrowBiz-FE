@@ -13,3 +13,8 @@ class UserFailed extends UserState{
   String error;
   UserFailed(this.error);
 }
+
+class UserWorkDetailSuccess extends UserState{
+  final UserWorkDetail userWorkDetail;
+  UserWorkDetailSuccess({required this.userWorkDetail});
+}

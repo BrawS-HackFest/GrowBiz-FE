@@ -118,7 +118,7 @@ class _AllWorkersPageState extends State<AllWorkersPage> {
                         onTap: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return DetailWorkPage(
-
+                              id: userData[index].id,
                             );
                           },));
                         },
