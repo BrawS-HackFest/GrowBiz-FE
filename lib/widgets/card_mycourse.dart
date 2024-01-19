@@ -5,9 +5,11 @@ import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 
 class CardMyCourse extends StatelessWidget {
-  CardMyCourse({super.key, required this.image, required this.title});
+  CardMyCourse({super.key, required this.image, required this.title,required this.onTap});
   final String image;
   final String title;
+  final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -81,11 +83,7 @@ class CardMyCourse extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                        return ListContentCourse();
-                      },));
-                    },
+                    onTap:onTap,
                     child: Container(
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,

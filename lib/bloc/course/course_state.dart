@@ -24,3 +24,13 @@ class CourseUserSuccess extends CourseState{
   final List<CourseUserModel> courseUserModel;
   CourseUserSuccess({required this.courseUserModel});
 }
+
+class CourseMaterialSuccess extends CourseState{
+  final List<CourseMaterials> courseMaterials;
+  CourseMaterialSuccess({required this.courseMaterials});
+}
+
+class CourseDetailMaterialSuccess extends CourseState{
+  final CourseDetailMaterial courseDetailMaterial;
+  CourseDetailMaterialSuccess({required this.courseDetailMaterial});
+}

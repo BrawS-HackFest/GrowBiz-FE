@@ -14,3 +14,13 @@ class CourseUserFetched extends CourseEvent{
   String token;
   CourseUserFetched({required this.token});
 }
+
+class CourseMaterialFetched extends CourseEvent{
+  int id;
+  CourseMaterialFetched({required this.id});
+}
+
+class CourseDetailMaterialFetched extends CourseEvent{
+  int id;
+  CourseDetailMaterialFetched({required this.id});
+}

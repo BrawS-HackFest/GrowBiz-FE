@@ -6,6 +6,7 @@ import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/my_snackBar.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hackfest_mobile/widgets/skeletons/skeletons_article_detail.dart';
 
 class DetailArticlePage extends StatefulWidget {
   DetailArticlePage({super.key, required this.id});
@@ -42,9 +43,7 @@ class _DetailArticlePageState extends State<DetailArticlePage> {
                   return Text(state.error);
                 }
                 if(state is ArticleLoading){
-                  return Center(child: SpinKitWanderingCubes(
-                    color: MyColors.primaryBase,
-                  ),);
+                  return const SkeletonsArticleDetail();
                 }
                if(state is ArticleSingleSuccess){
                  final articleData = state.articleModel;
@@ -56,7 +55,7 @@ class _DetailArticlePageState extends State<DetailArticlePage> {
                        child: Column(
                          crossAxisAlignment: CrossAxisAlignment.center,
                          children: [
-                           Text(articleData.title, style:TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),
+                           Text(articleData.title, style:MyTextStyle.judulH4(color: MyColors.blackBase)),
                            const SizedBox(height: 10,),
                            Container(
                              width: double.infinity,

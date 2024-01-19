@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hackfest_mobile/bloc/user/user_bloc.dart';
 import 'package:hackfest_mobile/pages/detail_work_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/widgets/card_work.dart';
 import 'package:hackfest_mobile/widgets/my_textfield.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
 
-class AllWorkersPage extends StatelessWidget {
+class AllWorkersPage extends StatefulWidget {
   AllWorkersPage({super.key});
+
+  @override
+  State<AllWorkersPage> createState() => _AllWorkersPageState();
+}
+
+class _AllWorkersPageState extends State<AllWorkersPage> {
   TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState(){
+    super.initState();
+    context.read<UserBloc>().add(UserWorkFetched());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,25 +100,43 @@ class AllWorkersPage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20,),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22),
-            child: ScrollConfiguration(
-              behavior: NoGlowScrollBehavior(),
-              child: ListView.separated(itemBuilder: (context, index) {
-                return CardWork(
-                  onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                      return DetailWorkPage();
-                    },));
-                  },
-                );
-              }, separatorBuilder: (context, index) {
-                return const SizedBox(height: 15,);
-              }, itemCount: 7),
-            ),
-          ),
-        )
+        BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            if(state is UserWorkSuccess){
+              final userData = state.userData;
+              return Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 22),
+                  child: ScrollConfiguration(
+                    behavior: NoGlowScrollBehavior(),
+                    child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          final category = userData[index].categories[0];
+                      return CardWork(
+                        name: userData[index].username,
+                        category: category['name'],
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                            return DetailWorkPage(
+
+                            );
+                          },));
+                        },
+                      );
+                    }, separatorBuilder: (context, index) {
+                      return const SizedBox(height: 15,);
+                    }, itemCount: userData.length),
+                  ),
+                ),
+              );
+            }if(state is UserFailed){
+              return Text(state.error);
+            }else{
+              return Container();
+            }
+
+          },
+        ),
       ],
     );
   }

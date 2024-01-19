@@ -61,7 +61,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           IdTokenResult token = await user.getIdTokenResult();
           String clearToken = '${token.token}';
           clearToken = clearToken.replaceAll('\n', '');
+          print(clearToken);
           final userData = await userRepository.getUser(clearToken);
+          print(userData.username);
           emit(AuthSuccess(token:clearToken, userModel: userData));
         }
         else {

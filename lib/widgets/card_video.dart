@@ -1,66 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
-import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CardVideo extends StatefulWidget {
-  CardVideo({super.key, required this.pathUrl});
-  String pathUrl;
+  CardVideo({super.key, required this.videoId});
+  String videoId;
 
   @override
   State<CardVideo> createState() => _CardVideoState();
 }
 
 class _CardVideoState extends State<CardVideo> {
-  late VideoPlayerController _controller;
+  late YoutubePlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(
-        '${widget.pathUrl}'),
-    )
-      ..initialize().then((_) {
-        setState(() {});
-      });
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.videoId,
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       width: 300,
       height: 175,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Listener(
-        onPointerDown: (_) {
-          setState(() {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
-          });
-        },
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: VideoPlayer(_controller),
-            ),
-            Positioned(
-              bottom: 8,
-              left: 8,
-              child: Container(
-                width: 27,
-                height: 27,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: MyColors.whiteBase,
-                ),
-                child: Icon(
-                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                ),
-              ),
-            ),
-          ],
+      child: ClipRect(
+        child: YoutubePlayer(
+          controller: _controller,
+          showVideoProgressIndicator: true,
+          progressIndicatorColor: Colors.blueAccent,
         ),
       ),
     );

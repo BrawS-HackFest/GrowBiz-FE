@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:hackfest_mobile/models/course_model.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/card_video.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DetailMyCourse extends StatefulWidget {
-  const DetailMyCourse({super.key});
+  DetailMyCourse({super.key, required this.courseDetailMaterial});
+  final CourseDetailMaterial courseDetailMaterial;
+
 
   @override
   State<DetailMyCourse> createState() => _DetailMyCourseState();
 }
 
 class _DetailMyCourseState extends State<DetailMyCourse> {
+  late var videoId;
+  @override
+  void initState(){
+    super.initState();
+    videoId=YoutubePlayer.convertUrlToId(widget.courseDetailMaterial.content)!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +39,9 @@ class _DetailMyCourseState extends State<DetailMyCourse> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CardVideo(pathUrl: "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",),
+                CardVideo(videoId: videoId,),
                 const SizedBox(height: 9,),
-                Text('Simulasi kedai kopi kekinian', style: MyTextStyle.buttonH3(color: MyColors.blackBase),),
+                Text(widget.courseDetailMaterial.title, style: MyTextStyle.buttonH3(color: MyColors.blackBase),),
                 const SizedBox(height: 5,),
                 Row(
                   children: [

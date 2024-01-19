@@ -39,5 +39,22 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
         emit(CourseFailed(e.toString()));
       }
     });
+    on<CourseMaterialFetched>((event, emit) async{
+      try{
+        final courseMaterialData = await courseRepository.getCourseMaterials(event.id);
+        emit(CourseMaterialSuccess(courseMaterials: courseMaterialData.courseData));
+      }catch(e){
+        emit(CourseFailed(e.toString()));
+      }
+    });
+    on<CourseDetailMaterialFetched>((event, emit)async{
+      try{
+        emit(CourseLoading());
+        final courseDetail = await courseRepository.getDetailCourseMaterial(event.id);
+        emit(CourseDetailMaterialSuccess(courseDetailMaterial: courseDetail));
+      }catch(e){
+        emit(CourseFailed(e.toString()));
+      }
+    });
   }
 }

@@ -37,7 +37,6 @@ class CourseModel {
           rating: json['rating']
       );
 }
-
 class DetailCourseModel {
   int id;
   String name;
@@ -87,9 +86,40 @@ class CourseUserData{
 class CourseUserModel{
   final String pict;
   final String title;
+  final int id;
 
-  CourseUserModel({required this.pict, required this.title});
+  CourseUserModel({required this.pict, required this.title,required this.id});
 
   factory CourseUserModel.fromJson(Map<String,dynamic>json)=>
-      CourseUserModel(pict: json['pict'], title: json['title']);
+      CourseUserModel(pict: json['pict'], title: json['title'],id: json['id']);
+}
+
+class CourseMaterialData{
+  final List<CourseMaterials> courseData;
+  CourseMaterialData({required this.courseData});
+
+  factory CourseMaterialData.fromJson(Map<String, dynamic> json)=>
+      CourseMaterialData(
+        courseData: List.from(
+            json["data"].map((course) => CourseMaterials.fromJson(course))),
+      );
+}
+
+class CourseMaterials{
+  int id;
+  String title;
+  CourseMaterials({required this.id, required this.title});
+  
+  factory CourseMaterials.fromJson(Map<String,dynamic> json)=>
+      CourseMaterials(id: json['id'], title: json['title']);
+}
+
+class CourseDetailMaterial{
+  final String title;
+  final String content;
+
+  CourseDetailMaterial({required this.title, required this.content});
+
+  factory CourseDetailMaterial.fromJson(Map<String,dynamic> json)=>
+      CourseDetailMaterial(title: json['title'], content: json['content']);
 }

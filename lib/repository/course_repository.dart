@@ -34,4 +34,24 @@ class CourseRepository{
       throw e.toString();
     }
   }
+
+  Future<CourseMaterialData> getCourseMaterials(int id) async{
+    try{
+      final response = await dio.get('/courses/$id/materials');
+      final data = response.data['data'] as List<dynamic>;
+      List<CourseMaterials> courseMaterials = data.map((course) => CourseMaterials.fromJson(course)).toList();
+      return CourseMaterialData(courseData: courseMaterials);
+    }catch(e){
+      throw e.toString();
+    }
+  }
+
+  Future<CourseDetailMaterial> getDetailCourseMaterial(int id) async{
+    try{
+      final response = await dio.get('/courses/materials/$id');
+      return CourseDetailMaterial.fromJson(response.data['data']);
+    }catch(e){
+      throw e.toString();
+    }
+  }
 }

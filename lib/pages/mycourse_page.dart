@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
 import 'package:hackfest_mobile/bloc/payment/payment_bloc.dart';
+import 'package:hackfest_mobile/pages/detail_mycourse.dart';
 import 'package:hackfest_mobile/pages/detail_payment_page.dart';
+import 'package:hackfest_mobile/pages/list_content_course.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/card_mycourse.dart';
@@ -90,7 +92,14 @@ class _MyCoursePageState extends State<MyCoursePage> {
                   ),
                   const SizedBox(height: 20,),
                   _currentPageIndex == 0 ?
-                  BlocBuilder<CourseBloc, CourseState>(
+                  BlocConsumer<CourseBloc, CourseState>(
+                    listener: (context, state) {
+                      if(state is CourseMaterialSuccess){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) {
+                          return ListContentCourse(courseMaterials: state.courseMaterials,);
+                        },));
+                      }
+                    },
                     builder: (context, state) {
                       if(state is CourseUserSuccess){
                         final courseData = state.courseUserModel;
@@ -102,6 +111,9 @@ class _MyCoursePageState extends State<MyCoursePage> {
                                 return CardMyCourse(
                                   title:courseData[index].title ,
                                   image: courseData[index].pict,
+                                  onTap: (){
+                                    context.read<CourseBloc>().add(CourseMaterialFetched(id: courseData[index].id));
+                                  },
                                 );
                               },
                               separatorBuilder: (context, index) {

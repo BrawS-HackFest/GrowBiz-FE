@@ -6,12 +6,21 @@ class UserRepository{
   
   Future<UserModel> getUser (String token)async{
     try{
-      final response = await dio.get('/users/profile',options: Options(headers:{"Authorization":"Bearer $token"}));
+      final response = await dio.get('/users/my-profile',options: Options(headers:{"Authorization":"Bearer $token"}));
       print(response.data);
       return UserModel.fromJson(response.data['data']);
     }catch(e){
       throw e.toString();
     }
-    
+  }
+  Future<UserWorkData> getALlWorkers ()async{
+    try{
+      final response = await dio.get('/users/all');
+      final data = response.data['data'] as List<dynamic>;
+      List<UserWorkModel> userData = data.map((user) => UserWorkModel.fromJson(user)).toList();
+      return UserWorkData(userWorkData: userData);
+    }catch(e){
+      throw e.toString();
+    }
   }
 }

@@ -3,8 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 class CardWork extends StatelessWidget {
-  CardWork({super.key, required this.onTap});
+  CardWork({super.key, required this.onTap, required this.category, required this.name});
   final VoidCallback onTap;
+  final String category;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +51,9 @@ class CardWork extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Content Writer', style: MyTextStyle.buttonH3(color: MyColors.blackBase),),
+                          Text(category, style: MyTextStyle.buttonH3(color: MyColors.blackBase),),
                           const SizedBox(height: 5,),
-                          Text('Aulia Fawwaz', style: MyTextStyle.captionH5(color: MyColors.greyBase),),
+                          Text(name, style: MyTextStyle.captionH5(color: MyColors.greyBase),),
                           const SizedBox(height: 5,),
                           Container(
                             child: Row(
