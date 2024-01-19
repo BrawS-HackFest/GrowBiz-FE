@@ -3,8 +3,8 @@ import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CardVideo extends StatefulWidget {
-  CardVideo({super.key, required this.videoId});
-  String videoId;
+  CardVideo({Key? key, required this.videoId}) : super(key: key);
+  final String videoId;
 
   @override
   State<CardVideo> createState() => _CardVideoState();
@@ -30,10 +30,12 @@ class _CardVideoState extends State<CardVideo> {
     return Container(
       width: 300,
       height: 175,
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
       ),
-      child: ClipRect(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
         child: YoutubePlayer(
           controller: _controller,
           showVideoProgressIndicator: true,
@@ -43,3 +45,4 @@ class _CardVideoState extends State<CardVideo> {
     );
   }
 }
+

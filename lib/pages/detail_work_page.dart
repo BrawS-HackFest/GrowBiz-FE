@@ -8,6 +8,7 @@ import 'package:hackfest_mobile/widgets/desc_work_section.dart';
 import 'package:hackfest_mobile/widgets/my_button.dart';
 import 'package:hackfest_mobile/widgets/profile_work_section.dart';
 import 'package:hackfest_mobile/widgets/scrollbehavior.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailWorkPage extends StatefulWidget {
    DetailWorkPage({super.key, required this.id});
@@ -122,6 +123,9 @@ class _DetailWorkPageState extends State<DetailWorkPage> {
                                 width: double.infinity,
                                 child: MyButton(text: 'Hubungi', color: MyColors.primaryBase,
                                     onPressed: (){
+                                      String phone = userData.number.replaceRange(0, 1, "+62");
+                                      final Uri phoneNumber = Uri.parse('https://wa.me/$phone');
+                                      launchUrl(phoneNumber);
                                     }
                                 )
                             ),
@@ -147,4 +151,5 @@ class _DetailWorkPageState extends State<DetailWorkPage> {
             ),
     );
   }
+
 }

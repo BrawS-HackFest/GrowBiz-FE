@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/article/article_bloc.dart';
+import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/styles/my_text.dart';
 import 'package:hackfest_mobile/widgets/my_snackBar.dart';
@@ -178,7 +179,8 @@ class _DetailArticlePageState extends State<DetailArticlePage> {
                                        onPressed: (){
                                          context.read<ArticleBloc>().add(ArticleCommentUser(
                                            id: articleData.id,
-                                           comment: commentController.text
+                                           comment: commentController.text,
+                                           token: (context.read<AuthBloc>().state as AuthSuccess).token,
                                          ));
                                        },
                                        style: ElevatedButton.styleFrom(

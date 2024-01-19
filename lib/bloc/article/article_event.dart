@@ -11,5 +11,6 @@ class ArticleSingleFetch extends ArticleEvent{
 class ArticleCommentUser extends ArticleEvent{
   int id;
   String comment;
-  ArticleCommentUser({required this.comment, required this.id});
+  String token;
+  ArticleCommentUser({required this.comment, required this.id, required this.token});
 }

@@ -111,7 +111,7 @@ class _AllWorkersPageState extends State<AllWorkersPage> {
                     behavior: NoGlowScrollBehavior(),
                     child: ListView.separated(
                         itemBuilder: (context, index) {
-                          final category = userData[index].categories[0];
+                          final category = userData[index].categories[0] ;
                       return CardWork(
                         name: userData[index].username,
                         category: category['name'],

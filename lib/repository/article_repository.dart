@@ -22,9 +22,9 @@ class ArticleRepository{
       throw e.toString();
     }
   }
-  Future userCommentArticle ({required int id, required String comment})async{
+  Future userCommentArticle ({required int id, required String comment, required String token})async{
     try{
-      final response = await dio.post('/article/$id/create-comment', data: {
+      final response = await dio.post('/article/$id/create-comment', options: Options(headers: {"Authorization": "Bearer $token"}),data: {
         "comment" : comment
       });
       return response.data;

@@ -35,7 +35,8 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
       try{
         final id = event.id;
         final comment = event.comment;
-        await articleRepository.userCommentArticle(id:id, comment: comment );
+        final token = event.token;
+        await articleRepository.userCommentArticle(id:id, comment: comment,token: token );
         emit(ArticleCommentsSuccess());
       }catch(e){
         emit(ArticleFailed(e.toString()));
