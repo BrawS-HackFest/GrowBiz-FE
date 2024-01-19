@@ -36,3 +36,8 @@ class UpdatePassFailed extends AuthState{
   String error;
   UpdatePassFailed(this.error);
 }
+
+class UpdateUserSuccess extends AuthState{}
+
+class ResetPassSuccess extends AuthState{}
+

@@ -31,6 +31,16 @@ class UserRepository{
     }catch(e){
       throw e.toString();
     }
-    
+  }
+  
+  Future updateProfile({required String email, required String username, required String number, required String token})async{
+    try{
+     final response = await dio.post('/users/update-profile',options: Options(headers:{"Authorization":"Bearer $token"}),data: {
+       "username":username,
+       "number":number,
+     });
+    }catch(e){
+      throw e.toString();
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
 import 'package:hackfest_mobile/pages/main_page.dart';
+import 'package:hackfest_mobile/pages/reset_password_page.dart';
 import 'package:hackfest_mobile/pages/signup_page.dart';
 import 'package:hackfest_mobile/styles/my_colors.dart';
 import 'package:hackfest_mobile/widgets/my_button.dart';
@@ -87,7 +88,11 @@ class LoginPage extends StatelessWidget {
                         Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                    return ResetPasswordPage();
+                                  },));
+                                },
                                 child: Text(
                                   'Lupa kata sandi?',
                                   style: TextStyle(

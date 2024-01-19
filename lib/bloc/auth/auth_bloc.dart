@@ -109,5 +109,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(UpdatePassFailed(e.toString()));
       }
     });
+    on<ResetPassEvent>((event, emit) async{
+      try{
+        emit(AuthLoading());
+        await _firebaseAuth.sendPasswordResetEmail(email: event.email);
+        emit(ResetPassSuccess());
+      }on FirebaseAuthException catch(e){
+        emit(AuthError(error: e.message.toString()));
+      }catch(e){
+        emit(AuthError(error: e.toString()));
+      }
+    });
   }
 }

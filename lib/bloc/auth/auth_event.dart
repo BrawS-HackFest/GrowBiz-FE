@@ -24,3 +24,16 @@ class UpdatePassEvent extends AuthEvent{
   String confirmPassword;
   UpdatePassEvent({required this.password, required this.confirmPassword});
 }
+
+class UpdateUserEvent extends AuthEvent{
+  String username;
+  String email;
+  String number;
+
+  UpdateUserEvent({required this.username, required this.email, required this.number});
+}
+
+class ResetPassEvent extends AuthEvent{
+  String email;
+  ResetPassEvent({required this.email});
+}
