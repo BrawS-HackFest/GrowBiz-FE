@@ -1,12 +1,13 @@
+import 'package:GrowBiz/shared/api_url.dart';
 import 'package:dio/dio.dart';
 import 'package:GrowBiz/models/user_model.dart';
 
 class UserRepository{
-  Dio dio = Dio(BaseOptions(baseUrl: 'https://0bbf-104-28-245-128.ngrok-free.app'));
+  Dio dio = Dio();
   
   Future<UserModel> getUser (String token)async{
     try{
-      final response = await dio.get('/users/my-profile',options: Options(headers:{"Authorization":"Bearer $token"}));
+      final response = await dio.get(ApiUrl().pathUrl('/users/my-profile'),options: Options(headers:{"Authorization":"Bearer $token"}));
       print(response.data);
       return UserModel.fromJson(response.data['data']);
     }catch(e){
@@ -15,7 +16,7 @@ class UserRepository{
   }
   Future<UserWorkData> getALlWorkers ()async{
     try{
-      final response = await dio.get('/users/all');
+      final response = await dio.get(ApiUrl().pathUrl('/users/all'));
       final data = response.data['data'] as List<dynamic>;
       List<UserWorkModel> userData = data.map((user) => UserWorkModel.fromJson(user)).toList();
       return UserWorkData(userWorkData: userData);
@@ -26,7 +27,7 @@ class UserRepository{
   
   Future<UserWorkDetail> getUserWorkDetail(String id)async{
     try{
-      final response = await dio.get('/users/check-user?id=$id');
+      final response = await dio.get(ApiUrl().pathUrl('/users/check-user?id=$id'));
       return UserWorkDetail.fromJson(response.data);
     }catch(e){
       throw e.toString();
@@ -35,7 +36,7 @@ class UserRepository{
   
   Future updateProfile({required String email, required String username, required String number, required String token})async{
     try{
-     final response = await dio.post('/users/update-profile',options: Options(headers:{"Authorization":"Bearer $token"}),data: {
+     final response = await dio.post(ApiUrl().pathUrl('/users/update-profile'),options: Options(headers:{"Authorization":"Bearer $token"}),data: {
        "username":username,
        "number":number,
      });

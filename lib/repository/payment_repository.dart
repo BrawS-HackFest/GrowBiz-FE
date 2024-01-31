@@ -1,12 +1,13 @@
+import 'package:GrowBiz/shared/api_url.dart';
 import 'package:dio/dio.dart';
 import 'package:GrowBiz/models/payment_model.dart';
 
 class PaymentRepository{
-  Dio dio = Dio(BaseOptions(baseUrl:'https://0bbf-104-28-245-128.ngrok-free.app'));
+  Dio dio = Dio();
 
   Future<PaymentModel> paymentRequest ({required String token, required int amount, required int courseId, required String method})async{
     try{
-      final response =await dio.post('/transactions/charge',options: Options(headers:{"Authorization":"Bearer $token"}),data: {
+      final response =await dio.post(ApiUrl().pathUrl('/transactions/charge'),options: Options(headers:{"Authorization":"Bearer $token"}),data: {
         'amount': amount,
         'course_id':courseId,
         'method':method
@@ -25,7 +26,7 @@ class PaymentRepository{
   }
   Future<WaitingPaymentData> getAllPaymentUser (String token)async{
    try{
-     final response = await dio.get('/transactions/transactions-by-user',options: Options(headers:{"Authorization":"Bearer $token"}));
+     final response = await dio.get(ApiUrl().pathUrl('/transactions/transactions-by-user'),options: Options(headers:{"Authorization":"Bearer $token"}));
      print(response.data);
      return WaitingPaymentData.fromJson(response.data);
    }catch(e){
@@ -34,7 +35,7 @@ class PaymentRepository{
   }
   Future<PaymentModel> getDetailWaitingPayment ({required int id})async{
     try{
-      final response =await dio.get('/transactions/$id');
+      final response =await dio.get(ApiUrl().pathUrl('/transactions/$id'));
       if (response.statusCode == 200) {
         final paymentRes = response.data['data'];
         return PaymentModel(invCode: paymentRes['va_number'], amount: paymentRes['amount'], method: paymentRes['method']);

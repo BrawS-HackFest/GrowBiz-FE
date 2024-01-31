@@ -1,3 +1,4 @@
+import 'package:GrowBiz/shared/api_url.dart';
 import 'package:dio/dio.dart';
 
 
@@ -7,7 +8,7 @@ class AuthRepository{
     try{
       print("uuid : $uid");
       print('email : $email');
-      var response = await dio.post('https://0bbf-104-28-245-128.ngrok-free.app/users/register',data: {
+      var response = await dio.post(ApiUrl().pathUrl('/users/register'),data: {
         'id':uid,
         'email':email
       });
