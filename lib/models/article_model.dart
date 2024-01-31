@@ -1,6 +1,5 @@
 class ArticleData {
   final List<ArticleModel> articleData;
-
   ArticleData({required this.articleData});
 
   factory ArticleData.fromJson(Map<String, dynamic> json) {
