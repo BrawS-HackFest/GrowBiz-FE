@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:hackfest_mobile/models/payment_model.dart';
-import 'package:hackfest_mobile/repository/payment_repository.dart';
+import 'package:GrowBiz/models/payment_model.dart';
+import 'package:GrowBiz/repository/payment_repository.dart';
 
 part 'payment_event.dart';
 

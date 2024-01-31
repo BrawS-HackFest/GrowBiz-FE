@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackfest_mobile/bloc/article/article_bloc.dart';
-import 'package:hackfest_mobile/bloc/auth/auth_bloc.dart';
-import 'package:hackfest_mobile/bloc/course/course_bloc.dart';
+import 'package:GrowBiz/bloc/article/article_bloc.dart';
+import 'package:GrowBiz/bloc/auth/auth_bloc.dart';
+import 'package:GrowBiz/bloc/course/course_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:hackfest_mobile/bloc/payment/payment_bloc.dart';
-import 'package:hackfest_mobile/bloc/user/user_bloc.dart';
-import 'package:hackfest_mobile/firebase_options.dart';
-import 'package:hackfest_mobile/pages/splash_page.dart';
-import 'package:hackfest_mobile/repository/article_repository.dart';
-import 'package:hackfest_mobile/repository/course_repository.dart';
-import 'package:hackfest_mobile/repository/payment_repository.dart';
-import 'package:hackfest_mobile/repository/user_repository.dart';
+import 'package:GrowBiz/bloc/payment/payment_bloc.dart';
+import 'package:GrowBiz/bloc/user/user_bloc.dart';
+import 'package:GrowBiz/firebase_options.dart';
+import 'package:GrowBiz/presentations/pages/splash/splash_page.dart';
+import 'package:GrowBiz/repository/article_repository.dart';
+import 'package:GrowBiz/repository/course_repository.dart';
+import 'package:GrowBiz/repository/payment_repository.dart';
+import 'package:GrowBiz/repository/user_repository.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

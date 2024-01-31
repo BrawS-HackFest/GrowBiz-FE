@@ -2,8 +2,8 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:hackfest_mobile/models/article_model.dart';
-import 'package:hackfest_mobile/repository/article_repository.dart';
+import 'package:GrowBiz/models/article_model.dart';
+import 'package:GrowBiz/repository/article_repository.dart';
 
 part 'article_event.dart';
 part 'article_state.dart';

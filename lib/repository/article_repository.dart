@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hackfest_mobile/models/article_model.dart';
+import 'package:GrowBiz/models/article_model.dart';
 
 class ArticleRepository{
   final dio = Dio(BaseOptions(baseUrl:'https://0bbf-104-28-245-128.ngrok-free.app'));

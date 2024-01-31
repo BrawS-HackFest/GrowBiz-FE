@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hackfest_mobile/models/payment_model.dart';
+import 'package:GrowBiz/models/payment_model.dart';
 
 class PaymentRepository{
   Dio dio = Dio(BaseOptions(baseUrl:'https://0bbf-104-28-245-128.ngrok-free.app'));

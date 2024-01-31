@@ -1,6 +1,5 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackfest_mobile/models/course_model.dart';
+import 'package:GrowBiz/models/course_model.dart';
 import 'package:flutter/foundation.dart' show immutable;
 
 

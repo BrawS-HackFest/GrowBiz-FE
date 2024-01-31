@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hackfest_mobile/models/user_model.dart';
-import 'package:hackfest_mobile/repository/auth_repository.dart';
-import 'package:hackfest_mobile/repository/user_repository.dart';
+import 'package:GrowBiz/models/user_model.dart';
+import 'package:GrowBiz/repository/auth_repository.dart';
+import 'package:GrowBiz/repository/user_repository.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 

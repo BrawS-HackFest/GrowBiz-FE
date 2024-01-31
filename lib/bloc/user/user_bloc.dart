@@ -2,8 +2,8 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart' show immutable;
-import 'package:hackfest_mobile/models/user_model.dart';
-import 'package:hackfest_mobile/repository/user_repository.dart';
+import 'package:GrowBiz/models/user_model.dart';
+import 'package:GrowBiz/repository/user_repository.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
